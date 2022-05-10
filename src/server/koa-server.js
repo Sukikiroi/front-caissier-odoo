@@ -2,16 +2,23 @@ const express = require('express')
 const app = express()
 const port = 3004
 var cors = require('cors')
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 app.use(cors())
+
+
+
+
 const Odoo = require('odoo-await')
+
 
 
 const odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
-    db: 'bourhancorporation',
+    db: 'bourhanbackup',
     username: 'kaddourabdellaziz@gmail.com',
+    //username: 'tecmint',
     password: 'rabeh'
 });
 const odooapi = async () => {
@@ -47,9 +54,19 @@ let result={
   todaBbalance:todaBbalance,
   todayincome:todayIncome,
 }
-  res.end(JSON.stringify(result, null, 2))
+  res.send(JSON.stringify(result, null, 2))
 })
 
+
+
+app.post('/income/newincome',async(req,res)=>{
+  console.log('Got body:', req.body);
+  console.log('you enter yay')
+
+  const partnerId = await odoo.create('caissier.income', {date:'2022-05-11',first_qty: '17',seconde_qty:'13'});
+  console.log(partnerId)
+  res.send(JSON.stringify(req.body, null, 2))
+})
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

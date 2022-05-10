@@ -57,11 +57,21 @@ export default function WithAction() {
               as={'nav'}
               spacing={4}
               display={{ base: 'none', md: 'flex' }}>
-             
-                <Link href="/openning">الافتتاح</Link>
-                <Link href="/income">المداخيل</Link>
-                <Link href="/spending">المصاريف</Link>
-                <Link href="/closing">الغلق</Link>
+               <Button colorScheme='teal' variant='solid'>
+
+              
+                <Link href="/openning">الافتتاح</Link> </Button>
+                <Button colorScheme='teal' variant='solid'>
+                <Link href="/income">المداخيل</Link> </Button>
+                <Button colorScheme='teal' variant='solid'>
+                <Link href="/spending">المصاريف</Link> </Button>
+                <Button colorScheme='teal' variant='solid'>
+                <Link href="/closing">الغلق</Link> </Button>
+                <Button colorScheme='teal' variant='outline'>
+                <Link href="/reporting">التقارير</Link>
+                </Button>
+            
+            
              
               
             </HStack>
