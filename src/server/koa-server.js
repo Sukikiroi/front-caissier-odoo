@@ -11,16 +11,17 @@ app.use(cors())
 
 const Odoo = require('odoo-await')
 
-
-
-const odoo = new Odoo({
-    baseUrl: 'http://localhost',
-    port: 8069, // see comments below regarding port option
-    db: 'bourhanbackup',
-    username: 'kaddourabdellaziz@gmail.com',
-    //username: 'tecmint',
-    password: 'rabeh'
+var odoo = new Odoo({
+  baseUrl: 'http://localhost',
+  port: 8069, // see comments below regarding port option
+  db: 'bourhanbackup',
+  //username: 'souilhmoh@gm.com',
+  username: 'kaddourabdellaziz@gmail.com',
+  //username: 'tecmint',
+  password: 'rabeh'
 });
+
+
 const odooapi = async () => {
   await odoo.connect();
   const records =  await odoo.searchRead(`caissier.income`);
@@ -28,7 +29,10 @@ const odooapi = async () => {
 return [{id:"1"}]
 }
 
+app.post('/login', (req, res) => {
 
+  res.send(req.body)
+})
 
 
 
@@ -39,6 +43,7 @@ app.get('/', (req, res) => {
 app.get('/income', async(req, res) => {
   await odoo.connect();
   const records =  await odoo.searchRead(`caissier.income`);
+  const company =  await odoo.searchRead('res.company');
   
   res.end(JSON.stringify(records, null, 2))
 })

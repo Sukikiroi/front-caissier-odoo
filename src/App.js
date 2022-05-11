@@ -33,20 +33,27 @@ import Income from './incomeTable/Income';
 import Spending from './spending/spending'
 import Openning from './openning/opening'
 import Reporting from './reporting/reporting'
-ChartJS.register(...registerables);
+import Home from "./home/home"
+import Login from "./login/login"
+
 function App() {
 
 
   
   return (
     <ChakraProvider theme={theme}>
-        <Navbar/>       
+           
       <Routes>
         <Route path="/income" element={<Income />} />
         <Route path="/closing" element={<Closing />} />
         <Route path="/spending" element={<Spending />} />
         <Route path="/openning" element={<Openning />} />
         <Route path="/reporting" element={<Reporting />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+
+
+        
       </Routes>
     </ChakraProvider>
   );

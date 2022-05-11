@@ -86,6 +86,12 @@ export default function WithAction() {
               Action
             </Button> */}
             <Menu>
+              <Box mr='5'>
+                Ifri
+                :
+                الفرع
+                
+              </Box>
               <MenuButton
                 as={Button}
                 rounded={'full'}

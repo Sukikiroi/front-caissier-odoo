@@ -44,10 +44,16 @@ const Income = () => {
       setdataincome(today.todayincome);
       console.log(today);
     };
-    if (!total || !today) return <div>loading...</div>;
+    if (!total || !today) return <div>
+           <Navbar/>
+      loading...
+      
+      </div>;
      return (
          <>
+         <Navbar/>
       <Box bg="white" w="100%" p={4} color="white" flex="start">
+        
       <Flex>
         <Box p="4">
           <Tag> 30000 الرصيد العام</Tag>
