@@ -9,16 +9,17 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  HStack,
 } from '@chakra-ui/react';
 import { Container } from '@chakra-ui/react';
 
-
+import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons'
 const IncomeTable = ({data}) => {
 
  
   return (
     <Container maxW="1250px" bg="black.600" color="black">
-      <TableContainer>
+      <TableContainer border={'4px solid #2C9BC8'} borderRadius={'5'}>
         <Table variant="simple">
           <Thead bg={'#2C9BC8'} >
             <Tr color={'white'}>
@@ -31,6 +32,8 @@ const IncomeTable = ({data}) => {
               <Th color={'white'}> صنف 1000</Th>
               <Th color={'white'}> صنف 500</Th>
               <Th color={'white'}> صنف 200</Th>
+              <Th color={'white'}> أجراءات</Th>
+              
            
              
             </Tr>
@@ -47,6 +50,15 @@ const IncomeTable = ({data}) => {
                   <Td>{income.seconde_qty}</Td>
                   <Td>{income.tree_qty}</Td>
                   <Td>{income.four_qty}</Td>
+                  <Td>{income.four_qty}</Td>
+                  <Td>
+                    <HStack>
+                    <DeleteIcon color={'tomato'} w={19} h={19}/>
+                    <EditIcon color={'green.400'}  w={19} h={19}/>
+                    </HStack>
+                   
+                    
+                    </Td>
                 </Tr>
               );
             })}

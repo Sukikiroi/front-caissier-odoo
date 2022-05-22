@@ -29,6 +29,8 @@ import { Routes, Route } from 'react-router-dom';
 import NewIncomeModal from './newIncomeModal';
 import Navbar from '../navbar';
 import Drawernavbar from './drawerNavbar';
+import IncomeFilter from './IncomeFilter';
+import NewIncome from './NewIncome';
 
 const Income = () => {
   const fetcher = (...args) => fetch(...args).then(res => res.json());
@@ -68,12 +70,8 @@ const Income = () => {
   <Box w={'100%'} mt={30}>
     <HStack>
       <Spacer/>
-      <Button  bg={'#2C9BC8'}>
-فيلتر 
-      </Button>
-      <Button  bg={'#2C9BC8'}>
-        جديد
-        </Button>
+    <IncomeFilter/>
+    <NewIncome/>
     </HStack>
   </Box>
   <Box bg={'white'} w={'100%'} h={300}>
