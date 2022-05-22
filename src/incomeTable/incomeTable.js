@@ -20,17 +20,17 @@ const IncomeTable = ({data}) => {
     <Container maxW="1250px" bg="black.600" color="black">
       <TableContainer>
         <Table variant="simple">
-          <Thead>
-            <Tr>
-              <Th>الساعة</Th>
-              <Th>التاريخ</Th>
-              <Th>الرصيد المدخول</Th>
-              <Th>رقم العملية</Th>
-              <Th>رقم العميل</Th>
-              <Th> صنف 2000</Th>
-              <Th> صنف 1000</Th>
-              <Th> صنف 500</Th>
-              <Th> صنف 200</Th>
+          <Thead bg={'#2C9BC8'} >
+            <Tr color={'white'}>
+              <Th color={'white'}>الساعة</Th>
+              <Th color={'white'}>التاريخ</Th>
+              <Th color={'white'}>الرصيد المدخول</Th>
+              <Th color={'white'}>رقم العملية</Th>
+              <Th color={'white'}>رقم العميل</Th>
+              <Th color={'white'}> صنف 2000</Th>
+              <Th color={'white'}> صنف 1000</Th>
+              <Th color={'white'}> صنف 500</Th>
+              <Th color={'white'}> صنف 200</Th>
            
              
             </Tr>

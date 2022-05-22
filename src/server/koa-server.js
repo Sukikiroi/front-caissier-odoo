@@ -7,19 +7,11 @@ app.use(bodyParser.json());
 app.use(cors())
 
 
-
+ 
 
 const Odoo = require('odoo-await')
 
-var odoo = new Odoo({
-  baseUrl: 'http://localhost',
-  port: 8069, // see comments below regarding port option
-  db: 'bourhanbackup',
-  //username: 'souilhmoh@gm.com',
-  username: 'kaddourabdellaziz@gmail.com',
-  //username: 'tecmint',
-  password: 'rabeh'
-});
+
 
 
 const odooapi = async () => {
@@ -30,7 +22,7 @@ return [{id:"1"}]
 }
 
 app.post('/login', (req, res) => {
-
+console.log(value)
   res.send(req.body)
 })
 
@@ -41,6 +33,15 @@ app.get('/', (req, res) => {
 })
 
 app.get('/income', async(req, res) => {
+  var odoo = new Odoo({
+    baseUrl: 'http://localhost',
+    port: 8069, // see comments below regarding port option
+    db: 'bourhanbackup',
+    //username: 'souilhmoh@gm.com',
+    username: 'kaddourabdellaziz@gmail.com',
+    //username: 'tecmint',
+    password: 'rabeh'
+  });
   await odoo.connect();
   const records =  await odoo.searchRead(`caissier.income`);
   const company =  await odoo.searchRead('res.company');
@@ -49,6 +50,15 @@ app.get('/income', async(req, res) => {
 })
 
 app.get('/income/today', async(req, res) => {
+  var odoo = new Odoo({
+    baseUrl: 'http://localhost',
+    port: 8069, // see comments below regarding port option
+    db: 'bourhanbackup',
+    //username: 'souilhmoh@gm.com',
+    username: 'kaddourabdellaziz@gmail.com',
+    //username: 'tecmint',
+    password: 'rabeh'
+  });
   await odoo.connect();
   const todayIncome =  await odoo.searchRead(`caissier.income`, ['date', '=', '2022-05-11']);
   let todaBbalance=3

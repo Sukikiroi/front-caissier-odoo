@@ -47,6 +47,7 @@ const Spending = () => {
     if (!total || !today) return <div>loading...</div>;
      return (
          <>
+         <Navbar/>
       <Box bg="white" w="100%" p={4} color="white" flex="start">
       <Flex>
         <Box p="4">

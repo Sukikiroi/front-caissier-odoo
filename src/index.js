@@ -5,11 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from "react-router-dom";
+import Sidebar from './Sidebar'
 ReactDOM.render(
   <StrictMode>
     <BrowserRouter>
     <ColorModeScript />
-    <App />
+  
+
+    <div style={{ width: "100%", height:'100%',backgroundColor: "", display: "flex" }}>
+      <div style={{ flexGrow: "1", backgroundColor: "white" }}>  
+      <App />
+      </div>
+ <Sidebar/>
+    </div>
     </BrowserRouter>
   
   </StrictMode>,
