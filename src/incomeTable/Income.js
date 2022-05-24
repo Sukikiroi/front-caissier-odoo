@@ -19,7 +19,7 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
 } from '@chakra-ui/react';
-
+import { Avatar, AvatarBadge, AvatarGroup ,Wrap,WrapItem} from '@chakra-ui/react'
 import { Flex, Spacer } from '@chakra-ui/react';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import useSWR from 'swr';
@@ -60,24 +60,32 @@ const Income = () => {
         <VStack>
           <Box w={'100%'} h={50} color={'#2C9BC8'} pr={30}>
             <Center w={'100%'} h={50}>
+              {/* <Wrap>
+                <WrapItem>
+                  <Avatar
+                    name="Segun Adebayo"
+                    src="https://bit.ly/sage-adebayo"
+                  />
+                </WrapItem>
+              </Wrap> */}
               <Spacer />
               <Heading>المداخيل</Heading>
             </Center>
-          </Box  >
+          </Box>
 
-          <Box   w={'100%'} h={500}  >
-<VStack>
-  <Box w={'100%'} mt={30}>
-    <HStack>
-      <Spacer/>
-    <IncomeFilter/>
-    <NewIncome/>
-    </HStack>
-  </Box>
-  <Box bg={'white'} w={'100%'} h={300}>
-  <IncomeTable data={total} />
-  </Box>
-</VStack>
+          <Box w={'100%'} h={500}>
+            <VStack>
+              <Box w={'100%'} mt={30}>
+                <HStack>
+                  <Spacer />
+                  <IncomeFilter />
+                  <NewIncome />
+                </HStack>
+              </Box>
+              <Box bg={'white'} w={'100%'} h={300}>
+                <IncomeTable data={total} />
+              </Box>
+            </VStack>
           </Box>
         </VStack>
       </Box>

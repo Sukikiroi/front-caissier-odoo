@@ -27,17 +27,22 @@ const IncomeFilter = () => {
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>Create your account</DrawerHeader>
+        <DrawerHeader>القيام ببعض التصفية</DrawerHeader>
 
         <DrawerBody>
-          <Input placeholder='Type here...' />
+          <Input placeholder='رقم الزبون'  mb={30}/>
+          <Input placeholder='عميل الصندوق'  mb={30}/>
+          <Input placeholder=' التاريخ'  mb={30}/>
+          <Input placeholder=' الساعة'  mb={30}/>
+          <Input placeholder='Type here...'  mb={30}/>
+          <Input placeholder='Type here...'  mb={30}/>
         </DrawerBody>
 
         <DrawerFooter>
           <Button variant='outline' mr={3} onClick={onClose}>
-            Cancel
+            الغاء
           </Button>
-          <Button colorScheme='blue'>Save</Button>
+          <Button colorScheme='blue'>فيلتر</Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

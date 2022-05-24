@@ -12,7 +12,15 @@ app.use(cors())
 const Odoo = require('odoo-await')
 
 
-
+var odoo = new Odoo({
+  baseUrl: 'http://localhost',
+  port: 8069, // see comments below regarding port option
+  db: 'bourhanbackup',
+  //username: 'souilhmoh@gm.com',
+  username: 'kaddourabdellaziz@gmail.com',
+  //username: 'tecmint',
+  password: 'rabeh'
+});
 
 const odooapi = async () => {
   await odoo.connect();
@@ -21,8 +29,10 @@ const odooapi = async () => {
 return [{id:"1"}]
 }
 
-app.post('/login', (req, res) => {
-console.log(value)
+app.post('/login', async(req, res) => {
+
+  const partnerId = await odoo.create('res.partner', {username: 'kaddourabdellaziz@gmail.com', password: 'rabeh'});
+  console.log(`Partner created with ID ${partnerId}`);
   res.send(req.body)
 })
 
@@ -77,9 +87,18 @@ let result={
 app.post('/income/newincome',async(req,res)=>{
   console.log('Got body:', req.body);
   console.log('you enter yay')
+  var odoo = new Odoo({
+    baseUrl: 'http://localhost',
+    port: 8069, // see comments below regarding port option
+    db: 'bourhanbackup',
+    //username: 'souilhmoh@gm.com',
+    username: 'kaddourabdellaziz@gmail.com',
+    //username: 'tecmint',
+    password: 'rabeh'
+  });
+  const Incomeid = await odoo.create('caissier.income', {date:'2022-05-11',first_qty: '17',seconde_qty:'13'});
+  console.log(Incomeid)
 
-  const partnerId = await odoo.create('caissier.income', {date:'2022-05-11',first_qty: '17',seconde_qty:'13'});
-  console.log(partnerId)
   res.send(JSON.stringify(req.body, null, 2))
 })
 app.listen(port, () => {

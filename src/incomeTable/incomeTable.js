@@ -10,18 +10,27 @@ import {
   TableCaption,
   TableContainer,
   HStack,
+  Button,
 } from '@chakra-ui/react';
 import { Container } from '@chakra-ui/react';
+import DeleteIncome from './DeleteIncome';
+import UpdateIncome from './UpdateIncome';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import PerfectScrollbar from 'react-perfect-scrollbar'
+import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
 
-import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons'
-const IncomeTable = ({data}) => {
 
- 
+
+
+
+const IncomeTable = ({ data }) => {
   return (
-    <Container maxW="1250px" bg="black.600" color="black">
-      <TableContainer border={'4px solid #2C9BC8'} borderRadius={'5'}>
+    <Container maxW="1250px" maxH={400} bg="black.600" color="black">
+        
+      <TableContainer   maxH={600} border={'4px solid #2C9BC8'} borderRadius={'5'}>
         <Table variant="simple">
-          <Thead bg={'#2C9BC8'} >
+        <PerfectScrollbar>
+          <Thead bg={'#2C9BC8'}>
             <Tr color={'white'}>
               <Th color={'white'}>الساعة</Th>
               <Th color={'white'}>التاريخ</Th>
@@ -33,12 +42,11 @@ const IncomeTable = ({data}) => {
               <Th color={'white'}> صنف 500</Th>
               <Th color={'white'}> صنف 200</Th>
               <Th color={'white'}> أجراءات</Th>
-              
-           
-             
             </Tr>
           </Thead>
           <Tbody>
+      
+
             {data?.map((income, key) => {
               return (
                 <Tr key={key}>
@@ -53,18 +61,20 @@ const IncomeTable = ({data}) => {
                   <Td>{income.four_qty}</Td>
                   <Td>
                     <HStack>
-                    <DeleteIcon color={'tomato'} w={19} h={19}/>
-                    <EditIcon color={'green.400'}  w={19} h={19}/>
+                      <DeleteIncome Incomeid={income.id}/>
+                      <UpdateIncome Incomeid={income.id} />
                     </HStack>
-                   
-                    
-                    </Td>
+                  </Td>
                 </Tr>
               );
             })}
+     
+
           </Tbody>
+          </PerfectScrollbar>
         </Table>
       </TableContainer>
+  
     </Container>
   );
 };

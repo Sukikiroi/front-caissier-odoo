@@ -2,8 +2,28 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   value: 0,
-  username:"",
-  password:""
+  username: 0,
+  password: 0,
+  paperone: 0,
+  papertwo: 0,
+  papertree: 0,
+
+
+
+  coinone: 0,
+  cointwo :0,
+  cointree: 0,
+  coinfour: 0,
+  coinfive: 0,
+  coinsix: 0,
+
+
+
+  customerfilter:'',
+  userfilter:'',
+  date:'',
+  time:'',
+  
 }
 
 export const settingsSlice = createSlice({
@@ -11,7 +31,12 @@ export const settingsSlice = createSlice({
   initialState,
   reducers: {
  
-
+addcoins:(state,action)=>{
+console.log(action.payload)
+},
+addpapers:(state,action)=>{
+  console.log(action.payload)
+  },
 
 
     login: (state, action) => {
@@ -26,6 +51,6 @@ export const settingsSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const {login } = settingsSlice.actions
+export const {login,addcoins,addpapers } = settingsSlice.actions
 
 export default settingsSlice.reducer
