@@ -83,10 +83,14 @@ const Income = () => {
 
   
     return (
-      <div>
-        <Drawernavbar />
-        loading...
-      </div>
+      <Box w={'100%'} h={600}>
+        <Center  w={'100%'} h={600}>
+        Loading ...
+        </Center>
+
+      </Box>
+       
+      
     );
   return (
     <>
