@@ -8,9 +8,26 @@ import {
     DrawerContent,
     DrawerCloseButton,useDisclosure,Button,Input
   } from '@chakra-ui/react'
+  import Fuse from 'fuse.js'
+  import { useSelector, useDispatch } from 'react-redux'
+import { updateData,actiavtesearch } from '../redux/slices'
 const IncomeFilter = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
+    const incomedata = useSelector((state) => state.settings.resultData)
+const dispatch=useDispatch()
+
+console.log(incomedata)
+    const dofilter=()=>{
+      // 2. Set up the Fuse instance
+const fuse = new Fuse(incomedata, {
+  keys: ['date']
+})
+
+// 3. Now search!
+dispatch(updateData(fuse.search('=2022-05-11')))
+dispatch(actiavtesearch())
+    }
   return (
     <>
   
@@ -42,7 +59,7 @@ const IncomeFilter = () => {
           <Button variant='outline' mr={3} onClick={onClose}>
             الغاء
           </Button>
-          <Button colorScheme='blue'>فيلتر</Button>
+          <Button colorScheme='blue' onClick={dofilter}>فيلتر</Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ChakraProvider,
   Box,
@@ -31,11 +31,40 @@ import Navbar from '../navbar';
 import Drawernavbar from './drawerNavbar';
 import IncomeFilter from './IncomeFilter';
 import NewIncome from './NewIncome';
+import Fuse from 'fuse.js'
+ 
+import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
 
+
+import { updateData } from '../redux/slices';
+import IncomeTablefilter from './incomeTablefilter';
 const Income = () => {
+  const resultData = useSelector((state) => state.settings.resultData)
+  const searchactivate = useSelector((state) => state.settings.searchactivate)
+  const dispatch = useDispatch()
+
+  const [dataincome, setdataincome] = React.useState();
+
   const fetcher = (...args) => fetch(...args).then(res => res.json());
   const { data: total } = useSWR('http://localhost:3004/income', fetcher);
-  const [dataincome, setdataincome] = React.useState(total);
+  useEffect(() => {    
+    axios.get(`http://localhost:3004/income`)
+    .then(res => {
+     
+      setdataincome(res.data)
+
+ 
+ 
+  dispatch(updateData(res.data)) 
+ 
+ 
+
+    })
+  
+
+  },[]);
+
 
   const { data: today } = useSWR('http://localhost:3004/income/today', fetcher);
 
@@ -48,6 +77,11 @@ const Income = () => {
     console.log(today);
   };
   if (!total || !today)
+
+
+
+
+  
     return (
       <div>
         <Drawernavbar />
@@ -83,7 +117,11 @@ const Income = () => {
                 </HStack>
               </Box>
               <Box bg={'white'} w={'100%'} h={300}>
-                <IncomeTable data={total} />
+
+                {
+                  searchactivate ?   <IncomeTablefilter data={resultData} /> :  <IncomeTable data={dataincome} />
+                }
+              
               </Box>
             </VStack>
           </Box>
