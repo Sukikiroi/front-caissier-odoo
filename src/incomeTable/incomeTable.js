@@ -42,6 +42,7 @@ const IncomeTable = ({ data }) => {
               <Th color={'white'}> صنف 500</Th>
               <Th color={'white'}> صنف 200</Th>
               <Th color={'white'}> أجراءات</Th>
+
             </Tr>
           </Thead>
           <Tbody>
@@ -54,11 +55,13 @@ const IncomeTable = ({ data }) => {
                   <Td>{income.date}</Td>
                   <Td>{income.balance}</Td>
                   <Td>{income.operation_code}</Td>
+                  <Td>{income.client_code}</Td>
+                  
                   <Td>{income.first_qty}</Td>
                   <Td>{income.seconde_qty}</Td>
                   <Td>{income.tree_qty}</Td>
                   <Td>{income.four_qty}</Td>
-                  <Td>{income.four_qty}</Td>
+                
                   <Td>
                     <HStack>
                       <DeleteIncome Incomeid={income.id}/>

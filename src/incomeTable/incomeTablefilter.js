@@ -25,7 +25,7 @@ import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
 
 const IncomeTablefilter = ({ data }) => {
   return (
-    <Container maxW="1250px" maxH={400} bg="black.600" color="black">
+    <Container maxW="1350px" maxH={400} bg="black.600" color="black">
         
       <TableContainer   maxH={600} border={'4px solid #2C9BC8'} borderRadius={'5'}>
         <Table variant="simple">
@@ -42,6 +42,9 @@ const IncomeTablefilter = ({ data }) => {
               <Th color={'white'}> صنف 500</Th>
               <Th color={'white'}> صنف 200</Th>
               <Th color={'white'}> أجراءات</Th>
+              <Th color={'white'}> أجراءات</Th>
+              <Th color={'white'}> أجراءات</Th>
+
             </Tr>
           </Thead>
           <Tbody>
@@ -50,19 +53,20 @@ const IncomeTablefilter = ({ data }) => {
             {data?.map((income, key) => {
               return (
                 <Tr key={key}>
-                  <Td>{income.item.time}</Td>
-                  <Td>{income.item.date}</Td>
-                  <Td>{income.item.balance}</Td>
-                  <Td>{income.item.operation_code}</Td>
-                  <Td>{income.item.first_qty}</Td>
-                  <Td>{income.item.seconde_qty}</Td>
-                  <Td>{income.item.tree_qty}</Td>
-                  <Td>{income.item.four_qty}</Td>
-                  <Td>{income.item.four_qty}</Td>
+                  <Td>{income.item?.time}</Td>
+                  <Td>{income.item?.date}</Td>
+                  <Td>{income.item?.balance}</Td>
+                  <Td>{income.item?.operation_code}</Td>
+                  <Td>{income.item?.client_code}</Td>
+                  <Td>{income.item?.first_qty}</Td>
+                  <Td>{income.item?.seconde_qty}</Td>
+                  <Td>{income.item?.tree_qty}</Td>
+                  <Td>{income.item?.four_qty}</Td>
+                  <Td>{income.item?.four_qty}</Td>
                   <Td>
                     <HStack>
-                      <DeleteIncome Incomeid={income.item.id}/>
-                      <UpdateIncome Incomeid={income.item.id} />
+                      <DeleteIncome Incomeid={income.item?.id}/>
+                      <UpdateIncome Incomeid={income.item?.id} />
                     </HStack>
                   </Td>
                 </Tr>

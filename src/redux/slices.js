@@ -48,11 +48,15 @@ export const settingsSlice = createSlice({
     actiavtesearch:(state)=>{
 state.searchactivate=true
 
-    }
+    },
+    deactiavtesearch:(state)=>{
+      state.searchactivate=false
+      
+          }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { login, addcoins, addpapers, updateData ,actiavtesearch} = settingsSlice.actions;
+export const { login, addcoins, addpapers, updateData ,actiavtesearch,deactiavtesearch} = settingsSlice.actions;
 
 export default settingsSlice.reducer;
