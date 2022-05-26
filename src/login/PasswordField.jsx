@@ -10,12 +10,14 @@ import {
 } from '@chakra-ui/react'
 import * as React from 'react'
 import { HiEye, HiEyeOff } from 'react-icons/hi'
+import { useDispatch } from 'react-redux'
+import { setpassword } from '../redux/slices'
 
 export const PasswordField = React.forwardRef((props, ref) => {
   const { isOpen, onToggle } = useDisclosure()
   const inputRef = React.useRef(null)
   const mergeRef = useMergeRefs(inputRef, ref)
-
+const dispatch=useDispatch()
   const onClickReveal = () => {
     onToggle()
 
@@ -39,6 +41,7 @@ export const PasswordField = React.forwardRef((props, ref) => {
           />
         </InputRightElement>
         <Input
+        onChange={(e)=>dispatch(setpassword(e.target.value))}
           id="password"
           ref={mergeRef}
           name="password"

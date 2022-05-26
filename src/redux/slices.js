@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   value: 0,
-  username: 0,
-  password: 0,
+  username: '',
+  password: '',
   paperone: 0,
   papertwo: 0,
   papertree: 0,
@@ -21,7 +21,7 @@ const initialState = {
   time: '',
 
   resultData: [],
-  searchactivate:false
+  searchactivate: false,
 };
 
 export const settingsSlice = createSlice({
@@ -35,28 +35,39 @@ export const settingsSlice = createSlice({
       console.log(action.payload);
     },
 
-    login: (state, action) => {
-      console.log(action.payload);
-      state.username = action.payload.username;
-      state.password = action.payload.password;
-    },
-
     updateData: (state, action) => {
       state.resultData = action.payload;
       console.log(action.payload);
     },
-    actiavtesearch:(state)=>{
-state.searchactivate=true
-
+    actiavtesearch: state => {
+      state.searchactivate = true;
     },
-    deactiavtesearch:(state)=>{
-      state.searchactivate=false
+    deactiavtesearch: state => {
+      state.searchactivate = false;
+    },
+    setemail: (state, action) => {
+      state.username = action.payload;
+      console.log(action.payload);
+    },
+    setpassword: (state, action) => {
+      console.log(action.payload);
+      state.password = action.payload;
       
-          }
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { login, addcoins, addpapers, updateData ,actiavtesearch,deactiavtesearch} = settingsSlice.actions;
+export const {
+  login,
+  addcoins,
+  addpapers,
+  updateData,
+  actiavtesearch,
+  deactiavtesearch,
+  setemail,
+  setpassword,
+
+} = settingsSlice.actions;
 
 export default settingsSlice.reducer;
