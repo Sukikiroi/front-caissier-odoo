@@ -23,7 +23,7 @@ const IncomeTable = ({ data }) => {
 
  
   return (
-    <Container maxW="1250px" bg="black.600" color="black">
+    <Container maxW="1000px" bg="black.600" color="black">
       <TableContainer border={'4px solid #2C9BC8'} borderRadius={'5'}>
         <Table variant="simple">
           <PerfectScrollbar>
@@ -31,14 +31,14 @@ const IncomeTable = ({ data }) => {
               <Tr color={'white'}>
                 <Th color={'white'}>الساعة</Th>
                 <Th color={'white'}>التاريخ</Th>
-                <Th color={'white'}>الرصيد المدخول</Th>
-                <Th color={'white'}>رقم العملية</Th>
-                <Th color={'white'}>رقم العميل</Th>
-                <Th color={'white'}> صنف 2000</Th>
-                <Th color={'white'}> صنف 1000</Th>
-                <Th color={'white'}> صنف 500</Th>
-                <Th color={'white'}> صنف 200</Th>
-                <Th color={'white'}> أجراءات</Th>
+                <Th color={'white'}>الرصيد </Th>
+                <Th color={'white'}>القسم </Th>
+                <Th color={'white'}> الباب</Th>
+                <Th color={'white'}>  المدخل</Th>
+                <Th color={'white'}>  المكلف</Th>
+                <Th color={'white'}>  المعني</Th>
+                <Th color={'white'}>  </Th>
+                <Th color={'white'}> </Th>
               </Tr>
             </Thead>
             <Tbody>

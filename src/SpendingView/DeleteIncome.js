@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React from 'react';
 
 import {
   Modal,
@@ -14,27 +14,12 @@ import {
 
 import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
 
-import axios from "axios"
-
-
-const UpdateIncome = ({Incomeid}) => {
+const DeleteIncome = ({Incomeid}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-const [data, setdata] = useState()
-
-
-  const getdata=()=>{
-    axios.post(`http://localhost:3004/income/id`,{id:Incomeid})
-    .then(res => {
-      setdata(res.data[0])
-    })
-    onOpen()
-    console.log(data)
-  }
-
   return (
     <>
-      <Button onClick={getdata} bg={'white'}>
-        <EditIcon color={'green.400'} w={19} h={19} />
+      <Button onClick={onOpen} bg={'white'}>
+        <DeleteIcon color={'tomato'} w={19} h={19} />
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -42,16 +27,7 @@ const [data, setdata] = useState()
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
- 
- {data?.time}
-  
-
- {data?.write_date}
- {data?.operation_code}
- 
-
- 
-
+          {Incomeid}
           </ModalBody>
 
           <ModalFooter>
@@ -66,4 +42,4 @@ const [data, setdata] = useState()
   );
 };
 
-export default UpdateIncome;
+export default DeleteIncome;

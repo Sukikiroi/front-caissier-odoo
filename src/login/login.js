@@ -14,17 +14,52 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useNavigate } from "react-router-dom";
 import * as React from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setemail } from '../redux/slices';
 import { Logo } from './Logo';
 import { OAuthButtonGroup } from './OAuthButtonGroup';
 import { PasswordField } from './PasswordField';
-
+import axios from 'axios';
 const Login = () => {
+  let navigate = useNavigate();
+  const [wrong, setwrong] = useState(false);
+  const username = useSelector(state => state.settings.username);
+  const password = useSelector(state => state.settings.password);
+  const submitlogin = () => {
+    console.log(username);
+    console.log(password);
 
-  const dispatch=useDispatch()
+    axios
+      .post(`http://localhost:3004/login`, {
+        username: username,
+        password: password,
+      })
+      .then(res => {
+        if (res.status === 200) {
+          setwrong(false);
+          console.log(res);
+          navigate("/home", { replace: true });
+          localStorage.setItem(
+            'log',
+            JSON.stringify({
+              username: username,
+              password: password,
+            })
+          )
+        }
+       
+        
+         
+        
+      });
+      console.log('bahahaha')
+      setwrong(true);
+  };
+
+  const dispatch = useDispatch();
   return (
     <Container
       bg={'white.50'}
@@ -88,7 +123,7 @@ const Login = () => {
                 <Input
                   id="email"
                   type="email"
-                  onChange={(e) => dispatch(setemail(e.target.value))}
+                  onChange={e => dispatch(setemail(e.target.value))}
                 />
               </FormControl>
               <PasswordField />
@@ -100,7 +135,16 @@ const Login = () => {
               </Button>
             </HStack>
             <Stack spacing="6">
-              <Button variant="primary"> تسجيل الدخول</Button>
+              <Button variant="primary" onClick={submitlogin}>
+                تسجيل الدخول
+              </Button>
+              {wrong ? (
+                <Box w={'100%'} h={20} color={'tomato'}>
+                  !اسم المستخدم أو كلمة السر خاطئة
+                </Box>
+              ) : (
+                ''
+              )}
             </Stack>
           </Stack>
         </Box>

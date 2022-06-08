@@ -45,8 +45,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateData } from '../redux/slices';
 import IncomeTablefilter from './incomeTablefilter';
 import { FaHome } from 'react-icons/fa';
-import {BiRefresh} from 'react-icons/bi'
+import { BiRefresh } from 'react-icons/bi';
 
+import Spendingtable from './Spendingtable';
 
 const Income = () => {
   const resultData = useSelector(state => state.settings.resultData);
@@ -56,7 +57,7 @@ const Income = () => {
   const [dataincome, setdataincome] = React.useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3004/income`).then(res => {
+    axios.get(`http://localhost:3004/spending`).then(res => {
       setdataincome(res.data);
 
       dispatch(updateData(res.data.reverse()));
@@ -72,14 +73,13 @@ const Income = () => {
       </Box>
     );
 
-    const reloaddata=()=>{
-      axios.get(`http://localhost:3004/income`).then(res => {
-    
-  console.log('reloadme')
-  console.log(res.data.reverse())
-        dispatch(updateData(res.data));
-      });
-    }
+  const reloaddata = () => {
+    axios.get(`http://localhost:3004/spending`).then(res => {
+      console.log('reloadme');
+      console.log(res.data.reverse());
+      dispatch(updateData(res.data));
+    });
+  };
   return (
     <>
       <Box bg="white" h={'100%'} p={4} color="white">
@@ -95,7 +95,7 @@ const Income = () => {
               </Button>
 
               <Spacer />
-              <Heading>المداخيل</Heading>
+              <Heading>المصاريف</Heading>
             </Center>
           </Box>
 
@@ -103,11 +103,11 @@ const Income = () => {
             <VStack>
               <Box w={'100%'} mt={30}>
                 <HStack>
-               
                   <Spacer />
-                  <Button onClick={reloaddata}
-                    leftIcon={<BiRefresh/>}
-                   bg={"#2C9BC8"}
+                  <Button
+                    onClick={reloaddata}
+                    leftIcon={<BiRefresh />}
+                    bg={'#2C9BC8'}
                     variant="solid"
                   >
                     Reload
@@ -122,6 +122,7 @@ const Income = () => {
                   <IncomeTablefilter data={resultData} />
                 ) : (
                   <IncomeTable data={dataincome} />
+                 // <Spendingtable />
                 )}
               </Box>
             </VStack>

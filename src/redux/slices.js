@@ -29,15 +29,22 @@ export const settingsSlice = createSlice({
   initialState,
   reducers: {
     addcoins: (state, action) => {
-      console.log(action.payload);
+      state.coinone=action.payload.coinone
+      state.cointwo= action.payload.cointwo
+      state.cointree=action.payload.cointree
+      state.coinone=action.payload.coinfour
+      state.cointwo= action.payload.coinfive
+      state.cointree=action.payload.coinsix
     },
     addpapers: (state, action) => {
-      console.log(action.payload);
+      state.paperone=action.payload.paperone
+      state.papertwo=action.payload.papertwo
+      state.papertree=action.payload.papertree
     },
 
     updateData: (state, action) => {
       state.resultData = action.payload;
-      console.log(action.payload);
+     
     },
     actiavtesearch: state => {
       state.searchactivate = true;
@@ -47,10 +54,10 @@ export const settingsSlice = createSlice({
     },
     setemail: (state, action) => {
       state.username = action.payload;
-      console.log(action.payload);
+      
     },
     setpassword: (state, action) => {
-      console.log(action.payload);
+       
       state.password = action.payload;
       
     },

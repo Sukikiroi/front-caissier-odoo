@@ -9,6 +9,7 @@ import {
   CalendarIcon,
   LockIcon,
   PlusSquareIcon,
+  SettingsIcon,
   ViewIcon,
 } from "@chakra-ui/icons";
 
@@ -16,9 +17,9 @@ import {
 
 
 
-
 const Sidebar = () => {
   const [collapse, setcollapse] = useState(false);
+
   return (
     <>
       {collapse ? (
@@ -66,6 +67,12 @@ const Sidebar = () => {
                 <Link onClick={()=>setcollapse(!collapse)} to={'/income'}> المقارنة</Link>
               </Center>
             </GridItem>
+            <GridItem w="100%" h="50" >
+              <Center    bg='white' color='#2C9BC8' fontSize="lg">
+
+                <Link onClick={()=>setcollapse(!collapse)} to={'/income'}>  الاعدادات</Link>
+              </Center>
+            </GridItem>
           </Grid>
         </div>
       ) : (
@@ -109,6 +116,11 @@ const Sidebar = () => {
             <GridItem w="100%" h="50" >
               <Center   bg='white' color='#2C9BC8'fontSize="lg">
                 <ViewIcon   h={30} w={30}/>
+              </Center>
+            </GridItem>
+            <GridItem w="100%" h="50" >
+              <Center   bg='white' color='#2C9BC8'fontSize="lg">
+                <SettingsIcon   h={30} w={30}/>
               </Center>
             </GridItem>
           </Grid>

@@ -21,7 +21,7 @@ import IncomePaper from './IncomePaper';
 import IncomeCoin from './IncomeCoin';
 import { useToast } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { Textarea } from '@chakra-ui/react';
 import axios from 'axios';
 import { updateData } from '../redux/slices';
 
@@ -29,45 +29,36 @@ const NewIncome = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const dispatch = useDispatch();
-  const [customernumber, setcustomernumber] = useState(0);
-  const [operationnumber, setoperationnumber] = useState(0);
-  const [desable, setdesable] = useState(false);
-  const [balance, setbalance] = useState(0);
-  const [caisseuser, setcaisseuser] = useState('');
-  const paperone = useSelector(state => state.settings.paperone);
-  const papertwo = useSelector(state => state.settings.papertwo);
-  const papertree = useSelector(state => state.settings.papertree);
-  const coinone = useSelector(state => state.settings.coinone);
-  const cointwo = useSelector(state => state.settings.cointwo);
-  const cointree = useSelector(state => state.settings.cointree);
-  const coinfour = useSelector(state => state.settings.coinfour);
-  const coinfive = useSelector(state => state.settings.coinfive);
-  const coinsix = useSelector(state => state.settings.coinsix);
+ 
+const [sold, setsold] = useState()
+const [entrance, setentrance] = useState()
+const [door, setdoor] = useState()
+const [section, setsection] = useState()
+const [concerned, setconcerned] = useState()
+const [taxpayer, settaxpayer] = useState()
+const [description, setdescription] = useState()
+const [desable, setdesable] = useState(false)
 
-  const newIncome = {
-    customer: customernumber,
-    operation: operationnumber,
-    balance: balance,
-    caisseuser: caisseuser,
-    paperone: paperone,
-    papertwo: papertwo,
-    papertree: papertree,
-    coinone: coinone,
-    cointwo: cointwo,
-    cointree: cointree,
-    coinfour: coinfour,
-    coinfive: coinfive,
-    coinsix: coinsix,
+
+
+  const newspending = {
+    entrance: entrance,
+    door: door,
+    section: section,
+    description: description,
+    sold: sold,
+    concerned: concerned,
+    taxpayer: taxpayer,
+ 
   };
 
   const sendIncome = () => {
-    console.log(newIncome);
+    console.log(newspending);
     axios
-      .post(`http://localhost:3004/income/newincome`, newIncome)
+      .post(`http://localhost:3004/spending/new`, newspending)
       .then(res => {
         console.log(res);
         console.log(res.data);
-       
       });
 
     toast({
@@ -81,7 +72,7 @@ const NewIncome = () => {
   };
 
   const closeme = () => {
-    axios.get(`http://localhost:3004/income`).then(res => {
+    axios.get(`http://localhost:3004/spending`).then(res => {
       dispatch(updateData(res.data.reverse()));
     });
     setdesable(false);
@@ -95,16 +86,26 @@ const NewIncome = () => {
       <Modal isOpen={isOpen} onClose={closeme}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>جديد </ModalHeader>
+          <ModalHeader> مصروف جديد </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Box w={400} h={300} bg={'white'}>
+            <Box h={450} bg={'white'}>
+
+              <Box display={'flex'} justifyContent={'flex-end'}>
+              <Button onClick={onOpen} bg={'#2C9BC8'} color={'white'}>
+        اشعار المسؤل
+      </Button>  
+              </Box>
+         
+      <br></br> 
+      <br></br> 
+      <br></br> 
               <VStack>
-                <HStack w={400}>
+                <HStack>
                   <Select
                     w={'50%'}
-                    placeholder=" الزبون"
-                    onChange={e => setcustomernumber(e.target.value)}
+                    placeholder=" القسم"
+                    onChange={e => setsection(e.target.value)}
                   >
                     <option value="option1">Option 1</option>
                     <option value="option2">Option 2</option>
@@ -113,42 +114,53 @@ const NewIncome = () => {
 
                   <Select
                     w={'50%'}
-                    placeholder=" العملية"
-                    onChange={e => setoperationnumber(e.target.value)}
+                    placeholder=" الباب"
+                    onChange={e => setdoor(e.target.value)}
                   >
                     <option value="option1">Option 1</option>
                     <option value="option2">Option 2</option>
                     <option value="option3">Option 3</option>
                   </Select>
                 </HStack>
-                <Flex w={400}>
+                <Select
+                  w={'100%'}
+                  placeholder=" المدخل"
+                  onChange={e => setentrance(e.target.value)}
+                >
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </Select>
+                <Flex>
                   <Spacer />
                   <Input
-                    onChange={e => setbalance(e.target.value)}
+                    onChange={e => setsold(e.target.value)}
                     placeholder="                الرصيد"
                     _placeholder={{ opacity: 1, color: 'black' }}
                   />
+                  <Input
+                    onChange={e => setconcerned(e.target.value)}
+                    placeholder="                المعني"
+                    _placeholder={{ opacity: 1, color: 'black' }}
+                  />
                 </Flex>
-                <Flex w={400}>
+                <Flex>
+                  <Input
+                    onChange={e => settaxpayer(e.target.value)}
+                    placeholder="                المكلف"
+                    _placeholder={{ opacity: 1, color: 'black' }}
+                  />
                   <Spacer />
                   <Input
-                    onChange={e => setcaisseuser(e.target.value)}
+                  
                     placeholder="                اسم أمين الصندوق"
                     _placeholder={{ opacity: 1, color: 'black' }}
                   />
                 </Flex>
 
-                <Flex w={'100%'}>
-                  <Spacer />
-                  <IncomePaper />
-                </Flex>
-                <Box w={'100%'} bg={'white'} h={'30'}></Box>
-
-                <Flex w={'100%'}>
-                  <Spacer />
-                  <IncomeCoin />
-                </Flex>
-                <Box w={'100%'} bg={'white'} h={'30'}></Box>
+                <Box w={'100%'} bg={''} h={'30'}>
+                  <Textarea placeholder=" ملاحظة"    onChange={e => setdescription(e.target.value)}  />
+                </Box>
               </VStack>
             </Box>
           </ModalBody>

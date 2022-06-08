@@ -29,7 +29,7 @@ import { Chart } from 'react-chartjs-2';
 import Closing from './closing/closing';
 import Navbar from './navbar';
 import Income from './incomeTable/Income';
-import Spending from './spending/spending';
+import Spending from "./SpendingView/Spending"
 import Openning from './openning/opening';
 import Reporting from './reporting/reporting';
 import Home from './home/home';
