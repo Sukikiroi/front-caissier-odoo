@@ -7,8 +7,8 @@ import {
   VStack,
   Code,
   Grid,
-  theme,
   Tag,
+  Center,
 } from '@chakra-ui/react';
 import {
   Breadcrumb,
@@ -29,16 +29,23 @@ import { Chart } from 'react-chartjs-2';
 import Closing from './closing/closing';
 import Navbar from './navbar';
 import Income from './incomeTable/Income';
-import Spending from "./SpendingView/Spending"
+import Spending from './SpendingView/Spending';
 import Openning from './openning/opening';
 import Reporting from './reporting/reporting';
 import Home from './home/home';
 import Login from './login/login';
+import Template from './print/Template';
 
+import '@fontsource/raleway/400.css';
+import '@fontsource/open-sans/700.css';
+import '@fontsource/changa/700.css';
 
-
+import theme from './theme';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
+
+import { PDFViewer } from '@react-pdf/renderer';
+import Settings from './settings/Settings';
 function App() {
   return (
     <ChakraProvider theme={theme}>
@@ -51,6 +58,17 @@ function App() {
           <Route path="/reporting" element={<Reporting />} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route
+            path="/print"
+            element={
+              <Center w={'100%'}>
+                <PDFViewer style={{ width: '900px', height: '600px' }}>
+                  <Template />
+                </PDFViewer>
+              </Center>
+            }
+          />
         </Routes>
       </Provider>
     </ChakraProvider>
@@ -58,5 +76,3 @@ function App() {
 }
 
 export default App;
-
- 

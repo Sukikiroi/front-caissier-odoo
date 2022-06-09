@@ -5,6 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from "react-router-dom";
+
+import '@fontsource/raleway/400.css'
+import '@fontsource/open-sans/700.css'
+import theme from './theme'
 import Sidebar from './Sidebar'
 ReactDOM.render(
   <StrictMode>

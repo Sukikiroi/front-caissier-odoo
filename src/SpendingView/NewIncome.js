@@ -15,6 +15,7 @@ import {
   VStack,
   Spacer,
   Flex,
+  Heading,
 } from '@chakra-ui/react';
 import { Select } from '@chakra-ui/react';
 import IncomePaper from './IncomePaper';
@@ -81,7 +82,11 @@ const [desable, setdesable] = useState(false)
   return (
     <>
       <Button onClick={onOpen} bg={'#2C9BC8'}>
+        <Heading as='h5' size='sm'>
         جديد
+
+  </Heading>
+        
       </Button>
       <Modal isOpen={isOpen} onClose={closeme}>
         <ModalOverlay />

@@ -18,7 +18,7 @@ import UpdateIncome from './UpdateIncome';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
-
+import {HiOutlinePrinter} from "react-icons/hi"
 const IncomeTable = ({ data }) => {
 
  
@@ -60,6 +60,8 @@ const IncomeTable = ({ data }) => {
                       <HStack>
                         <DeleteIncome Incomeid={income.id} />
                         <UpdateIncome Incomeid={income.id} />
+                        h
+                        <HiOutlinePrinter color='blue'/>
                       </HStack>
                     </Td>
                   </Tr>

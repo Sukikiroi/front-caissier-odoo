@@ -70,7 +70,7 @@ const Sidebar = () => {
             <GridItem w="100%" h="50" >
               <Center    bg='white' color='#2C9BC8' fontSize="lg">
 
-                <Link onClick={()=>setcollapse(!collapse)} to={'/income'}>  الاعدادات</Link>
+                <Link onClick={()=>setcollapse(!collapse)} to={'/settings'}>  الاعدادات</Link>
               </Center>
             </GridItem>
           </Grid>

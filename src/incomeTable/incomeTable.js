@@ -18,12 +18,11 @@ import UpdateIncome from './UpdateIncome';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
-
+import { HiOutlinePrinter } from 'react-icons/hi';
+import Printmodal from '../print/Printmodal';
 const IncomeTable = ({ data }) => {
-
- 
   return (
-    <Container maxW="1250px" bg="black.600" color="black">
+    <Container maxW="1300px" bg="black.600" color="black">
       <TableContainer border={'4px solid #2C9BC8'} borderRadius={'5'}>
         <Table variant="simple">
           <PerfectScrollbar>
@@ -60,6 +59,12 @@ const IncomeTable = ({ data }) => {
                       <HStack>
                         <DeleteIncome Incomeid={income.id} />
                         <UpdateIncome Incomeid={income.id} />
+                        <Printmodal
+                          w={900}
+                          h={600}
+                          time={income.time}
+                          date={income.date}
+                        />
                       </HStack>
                     </Td>
                   </Tr>
