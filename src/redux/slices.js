@@ -22,6 +22,7 @@ const initialState = {
 
   resultData: [],
   searchactivate: false,
+  company:localStorage.getItem('company')[0].companyname
 };
 
 export const settingsSlice = createSlice({
@@ -61,12 +62,16 @@ export const settingsSlice = createSlice({
       state.password = action.payload;
       
     },
+    changecompany:(state,action)=>{
+ console.log(action.payload)
+    }
   },
 });
 
 // Action creators are generated for each case reducer function
 export const {
   login,
+  changecompany,
   addcoins,
   addpapers,
   updateData,

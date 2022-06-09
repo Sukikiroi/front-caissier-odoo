@@ -47,50 +47,10 @@ const Home = () => {
               الخزينة
             </Center>
           </GridItem>
-          <GridItem w="150px" h="150" bg="blue.200" boxShadow="md" rounded="md">
-            <Image
-              boxSize="150px"
-              objectFit="cover"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG7ySIXNLpWrp0walXdWrZUEBVCXpyUeIxLQ&usqp=CAU"
-              alt="Dan Abramov"
-            />
-            <Center bg="teal.50" color="black">
-              العمال
-            </Center>
-          </GridItem>
-          <GridItem w="150px" h="150" bg="blue.200" boxShadow="md" rounded="md">
-            <Image
-              boxSize="150px"
-              objectFit="cover"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWEFMg91UdHJcc4VetPUIlpnx4pYiwzi9Dwg&usqp=CAU"
-              alt="Dan Abramov"
-            />
-              <Center bg='teal.50' color='black'>
-  الصندوق
-  </Center>
-          </GridItem>
-          <GridItem w="150px" h="150" bg="blue.200" boxShadow="md" rounded="md">
-            <Image
-              boxSize="150px"
-              objectFit="cover"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuUcKmmS8ZadQL37Jix94rDdZZalD2EyLP9A&usqp=CAU"
-              alt="Dan Abramov"
-            />
-            <Center bg="teal.50" color="black">
-              الشراء
-            </Center>
-          </GridItem>
-          <GridItem w="150px" h="150" bg="blue.200" boxShadow="md" rounded="md">
-            <Image
-              boxSize="150px"
-              objectFit="cover"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_5peZc75ZT_jaPDykU96dmNw_QVsxaKhrWw&usqp=CAU"
-              alt="Dan Abramov"
-            />
-            <Center bg="teal.50" color="black">
-              البيع
-            </Center>
-          </GridItem>
+       
+       
+       
+       
         </Grid>
       </Center>
     </Box>

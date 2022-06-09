@@ -40,13 +40,15 @@ const Login = () => {
       .then(res => {
         if (res.status === 200) {
           setwrong(false);
-          console.log(res);
+          console.log(res.data[0].company_id);
           navigate("/home", { replace: true });
           localStorage.setItem(
             'log',
             JSON.stringify({
               username: username,
               password: password,
+              company:res.data[0].company_id[1],
+              name:res.data[0].name,
             })
           )
         }

@@ -39,10 +39,12 @@ app.post('/login', async (req, res) => {
     });
     await odoo.connect();
     var user = await odoo.searchRead(`res.users`, { email: req.body.username });
+    var company = await odoo.searchRead(`res.company`,2);
+
     res.send(user);
     status = 200;
   } catch (exception_var) {
-    console.log(exception_var);
+    console.log(company);
     status = 400;
     res.send(status);
   }
