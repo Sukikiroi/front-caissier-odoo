@@ -24,103 +24,147 @@ const Sidebar = () => {
     <>
       {collapse ? (
         <div
-          style={{ width: "200px", backgroundColor: " " ,height:'100%',marginTop:'30px'}}
+          style={{
+            width: '200px',
+            backgroundColor: ' ',
+            height: '100%',
+            marginTop: '30px',
+          }}
         >
           <div
             style={{
-              width: "100",
-              height: "30px",
-              backgroundColor: " ",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: "30px",
-              borderRadius:"6"
-             
+              width: '100',
+              height: '30px',
+              backgroundColor: ' ',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: '30px',
+              borderRadius: '6',
             }}
           >
-            <Hamburger  borderTopRadius="6" bg='white' color='black' toggled={collapse} toggle={setcollapse} />
+            <Hamburger
+              borderTopRadius="6"
+              bg="white"
+              color="black"
+              toggled={collapse}
+              toggle={setcollapse}
+            />
           </div>
 
           <Grid templateColumns="repeat(1, 1fr)" gap={6}>
-            <GridItem w="100%" h="50" >
-              <Center    bg='white' color='#2C9BC8' fontSize="lg">
+            <GridItem w="100%" h="50">
+              <Center bg="white" color="#2C9BC8" fontSize="lg">
+                {localStorage.getItem('openning') == '1' ? (
+                  <Link onClick={() => setcollapse(!collapse)} to={'/income'}>
+                    {' '}
+                    المداخيل
+                  </Link>
+                ) : (
+                  "المداخيل"
 
-                <Link onClick={()=>setcollapse(!collapse)} to={'/income'}> المداخيل</Link>
+                )} 
               </Center>
             </GridItem>
-            <GridItem w="100%" h="50" >
-              <Center    bg='white' color='#2C9BC8' fontSize="lg">
+            <GridItem w="100%" h="50">
+              <Center bg="white" color="#2C9BC8" fontSize="lg">
+           
 
-                <Link onClick={()=>setcollapse(!collapse)} to={'/spending'}> المصاريف</Link>
+
+                {localStorage.getItem('openning') == '1' ? (
+                  <Link onClick={() => setcollapse(!collapse)} to={'/spending'}>
+                  {' '}
+                  المصاريف
+                </Link>
+                ) : (
+                  "المصاريف"
+
+                )} 
               </Center>
             </GridItem>
-            <GridItem w="100%" h="50" >
-              <Center    bg='white' color='#2C9BC8'fontSize="lg">
-
-                <Link onClick={()=>setcollapse(!collapse)} to={'/income'}> الغلق</Link>
+            <GridItem w="100%" h="50">
+              <Center bg="white" color="#2C9BC8" fontSize="lg">
+                <Link onClick={() => setcollapse(!collapse)} to={'/openning'}>
+                  {' '}
+                  الغلق
+                </Link>
               </Center>
             </GridItem>
-            <GridItem w="100%" h="50" >
-              <Center    bg='white' color='#2C9BC8' fontSize="lg">
-
-                <Link onClick={()=>setcollapse(!collapse)} to={'/income'}> المقارنة</Link>
+            <GridItem w="100%" h="50">
+              <Center bg="white" color="#2C9BC8" fontSize="lg">
+                <Link onClick={() => setcollapse(!collapse)} to={'/income'}>
+                  {' '}
+                  المقارنة
+                </Link>
               </Center>
             </GridItem>
-            <GridItem w="100%" h="50" >
-              <Center    bg='white' color='#2C9BC8' fontSize="lg">
-
-                <Link onClick={()=>setcollapse(!collapse)} to={'/settings'}>  الاعدادات</Link>
+            <GridItem w="100%" h="50">
+              <Center bg="white" color="#2C9BC8" fontSize="lg">
+                <Link onClick={() => setcollapse(!collapse)} to={'/settings'}>
+                  {' '}
+                  الاعدادات
+                </Link>
+              </Center>
+            </GridItem>
+            <GridItem w="100%" h="50">
+              <Center bg="white" color="#2C9BC8" fontSize="lg">
+                <Link onClick={() => setcollapse(!collapse)} to={'/login'}>
+                 
+                  تسجيل خروج
+                </Link>
               </Center>
             </GridItem>
           </Grid>
         </div>
       ) : (
         <div
-          style={{ width: "60px", backgroundColor: " ", height: "100%" ,marginTop:'30px'}}
+          style={{
+            width: '60px',
+            backgroundColor: ' ',
+            height: '100%',
+            marginTop: '30px',
+          }}
         >
           <div
             style={{
-              width: "100",
-              height: "30px",
-              backgroundColor: " ",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: "30px",
-              boxShadow:' 0px 10px 15px -3px rgba(0,0,0,0.1)'
+              width: '100',
+              height: '30px',
+              backgroundColor: ' ',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: '30px',
+              boxShadow: ' 0px 10px 15px -3px rgba(0,0,0,0.1)',
             }}
           >
-            <Box bg='#072F60' color='white'>
-            <Hamburger toggled={collapse} toggle={setcollapse} />
+            <Box bg="#072F60" color="white">
+              <Hamburger toggled={collapse} toggle={setcollapse} />
             </Box>
           </div>
           <Grid templateColumns="repeat(1, 1fr)" gap={6}>
-
-            <GridItem w="100%" h="50"  >
-              <Center bg='white' color='#2C9BC8'fontSize="lg">
-                
-                <PlusSquareIcon  h={30} w={30}/>
+            <GridItem w="100%" h="50">
+              <Center bg="white" color="#2C9BC8" fontSize="lg">
+                <PlusSquareIcon h={30} w={30} />
               </Center>
             </GridItem>
-            <GridItem w="100%" h="50" >
-              <Center   bg='white' color='#2C9BC8' fontSize="lg">
+            <GridItem w="100%" h="50">
+              <Center bg="white" color="#2C9BC8" fontSize="lg">
                 <CalendarIcon h={30} w={30} />
               </Center>
             </GridItem>
-            <GridItem w="100%" h="50" >
-              <Center   bg='white' color='#2C9BC8' fontSize="lg">
-                <LockIcon  h={30} w={30}/>
+            <GridItem w="100%" h="50">
+              <Center bg="white" color="#2C9BC8" fontSize="lg">
+                <LockIcon h={30} w={30} />
               </Center>
             </GridItem>
-            <GridItem w="100%" h="50" >
-              <Center   bg='white' color='#2C9BC8'fontSize="lg">
-                <ViewIcon   h={30} w={30}/>
+            <GridItem w="100%" h="50">
+              <Center bg="white" color="#2C9BC8" fontSize="lg">
+                <ViewIcon h={30} w={30} />
               </Center>
             </GridItem>
-            <GridItem w="100%" h="50" >
-              <Center   bg='white' color='#2C9BC8'fontSize="lg">
-                <SettingsIcon   h={30} w={30}/>
+            <GridItem w="100%" h="50">
+              <Center bg="white" color="#2C9BC8" fontSize="lg">
+                <SettingsIcon h={30} w={30} />
               </Center>
             </GridItem>
           </Grid>

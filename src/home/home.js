@@ -29,7 +29,7 @@ const Home = () => {
            
          
               <Center bg="teal.50" color="black">
-              <Link href='http://localhost:3000/income' isExternal>
+              <Link href='http://localhost:3000/openning' isExternal>
               الصندوق
               </Link>
                 

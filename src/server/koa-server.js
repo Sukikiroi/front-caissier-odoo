@@ -42,6 +42,7 @@ app.post('/login', async (req, res) => {
     var company = await odoo.searchRead(`res.company`,2);
 
     res.send(user);
+    console.log(company[0].max_balance);
     status = 200;
   } catch (exception_var) {
     console.log(company);
@@ -74,16 +75,17 @@ app.post('/income/id', async (req, res) => {
   }
 });
 
-app.get('/income', async (req, res) => {
+app.post('/income', async (req, res) => {
   var odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
     db: 'bourhanbackup',
     //username: 'souilhmoh@gm.com',
-    username: 'kaddourabdellaziz@gmail.com',
+    username: req.body.username,
     //username: 'tecmint',
-    password: 'rabeh',
+    password: req.body.password,
   });
+  console.log(req.body.username)
   await odoo.connect();
   const records = await odoo.searchRead(`caissier.income`);
 

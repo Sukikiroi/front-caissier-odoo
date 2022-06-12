@@ -25,7 +25,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Textarea } from '@chakra-ui/react';
 import axios from 'axios';
 import { updateData } from '../redux/slices';
-
+ 
+import {SiWhatsapp} from "react-icons/si"
 const NewIncome = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -97,9 +98,11 @@ const [desable, setdesable] = useState(false)
             <Box h={450} bg={'white'}>
 
               <Box display={'flex'} justifyContent={'flex-end'}>
-              <Button onClick={onOpen} bg={'#2C9BC8'} color={'white'}>
-        اشعار المسؤل
-      </Button>  
+              
+      <Button colorScheme='whatsapp' leftIcon={<SiWhatsapp />}>
+      اشعار المسؤل
+
+  </Button> 
               </Box>
          
       <br></br> 
@@ -157,7 +160,7 @@ const [desable, setdesable] = useState(false)
                   />
                   <Spacer />
                   <Input
-                  
+                  value={JSON.parse(localStorage.getItem('log')).name}
                     placeholder="                اسم أمين الصندوق"
                     _placeholder={{ opacity: 1, color: 'black' }}
                   />
@@ -171,12 +174,12 @@ const [desable, setdesable] = useState(false)
           </ModalBody>
 
           <ModalFooter>
-            <Button variant="ghost" bg={'red.300'} color={'white'} mr={3}>
+            <Button variant="ghost" bg={'blue.300'} color={'white'} mr={3}>
               الغاء
             </Button>
 
             <Button
-              bg={'green.200'}
+              bg={'blue.200'}
               color={'white'}
               mr={3}
               onClick={sendIncome}

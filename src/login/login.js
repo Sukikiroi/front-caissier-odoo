@@ -77,7 +77,7 @@ const Login = () => {
     >
       <Stack spacing="8">
         <Stack spacing="6">
-          <Logo />
+         
           <Stack
             spacing={{
               base: '2',

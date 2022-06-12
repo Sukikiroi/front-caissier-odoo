@@ -56,7 +56,10 @@ const Income = () => {
   const [dataincome, setdataincome] = React.useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3004/income`).then(res => {
+    const username=JSON.parse(localStorage.getItem('log')).username
+    const password=JSON.parse(localStorage.getItem('log')).password
+    const user={username:username,password:password}
+    axios.post(`http://localhost:3004/income`,user).then(res => {
       setdataincome(res.data);
 
       dispatch(updateData(res.data.reverse()));
@@ -73,7 +76,8 @@ const Income = () => {
     );
 
     const reloaddata=()=>{
-      axios.get(`http://localhost:3004/income`).then(res => {
+      const user={username:"",password:"lll"}
+      axios.post(`http://localhost:3004/income`,user).then(res => {
     
   console.log('reloadme')
   console.log(res.data.reverse())
