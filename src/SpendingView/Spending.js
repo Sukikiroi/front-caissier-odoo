@@ -27,17 +27,12 @@ import {
   WrapItem,
 } from '@chakra-ui/react';
 import { Flex, Spacer } from '@chakra-ui/react';
-import { ColorModeSwitcher } from '../ColorModeSwitcher';
-import useSWR from 'swr';
-import IncomeTable from './incomeTable';
+
 import { Button, ButtonGroup } from '@chakra-ui/react';
-import { Routes, Route } from 'react-router-dom';
-import NewIncomeModal from './newIncomeModal';
-import Navbar from '../navbar';
-import Drawernavbar from './drawerNavbar';
+
 import IncomeFilter from './IncomeFilter';
 import NewIncome from './NewIncome';
-import Fuse from 'fuse.js';
+
 
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
@@ -45,9 +40,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateData } from '../redux/slices';
 import IncomeTablefilter from './incomeTablefilter';
 import { FaHome } from 'react-icons/fa';
+import { FcPrint } from 'react-icons/fc';
+
 import { BiRefresh } from 'react-icons/bi';
 
-import Spendingtable from './Spendingtable';
+import Spendingtable from './Table';
 
 const Income = () => {
   const resultData = useSelector(state => state.settings.resultData);
@@ -106,11 +103,11 @@ const Income = () => {
                   <Spacer />
                   <Button
                     onClick={reloaddata}
-                    leftIcon={<BiRefresh />}
+                    leftIcon={<FcPrint />}
                     bg={'#2C9BC8'}
                     variant="solid"
                   >
-                    Reload
+                    طباعة
                   </Button>
                   <IncomeFilter />
 
@@ -121,7 +118,7 @@ const Income = () => {
                 {searchactivate ? (
                   <IncomeTablefilter data={resultData} />
                 ) : (
-                  <IncomeTable data={dataincome} />
+                  <Spendingtable data={dataincome} />
                  // <Spendingtable />
                 )}
               </Box>

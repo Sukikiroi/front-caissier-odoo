@@ -89,13 +89,20 @@ const NewIncome = () => {
   };
   return (
     <>
-      <Button onClick={onOpen} bg={'#2C9BC8'}>
+      <Button onClick={onOpen} bg={'#2C9BC8'}align='right'>
+        <Box align='left' width={'100%'}>
         جديد
+        </Box>
+                                            
       </Button>
       <Modal isOpen={isOpen} onClose={closeme}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>جديد </ModalHeader>
+          <br></br>
+          <ModalHeader align='left'> 
+          <Box align='right' width={'100%'}>
+        جديد
+        </Box> </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Box w={400} h={300} bg={'white'}>
@@ -106,9 +113,9 @@ const NewIncome = () => {
                     placeholder=" الزبون"
                     onChange={e => setcustomernumber(e.target.value)}
                   >
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                    <option value="option1">المخالصة</option>
+                    <option value="option2">قسط</option>
+                    <option value="option3">أخرى</option>
                   </Select>
 
                   <Select
@@ -116,16 +123,16 @@ const NewIncome = () => {
                     placeholder=" العملية"
                     onChange={e => setoperationnumber(e.target.value)}
                   >
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                     <option value="option1">المخالصة</option>
+                    <option value="option2">قسط</option>
+                    <option value="option3">أخرى</option>
                   </Select>
                 </HStack>
                 <Flex w={400}>
                   <Spacer />
                   <Input
                     onChange={e => setbalance(e.target.value)}
-                    placeholder="                الرصيد"
+                    placeholder="                المبلغ"
                     _placeholder={{ opacity: 1, color: 'black' }}
                   />
                 </Flex>

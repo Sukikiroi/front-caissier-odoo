@@ -1,33 +1,10 @@
 import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  Tag,
-  Center,
-} from '@chakra-ui/react';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-} from '@chakra-ui/react';
 
-import { Flex, Spacer } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import useSWR from 'swr';
-import IncomeTable from './incomeTable/incomeTable';
-import { Button, ButtonGroup } from '@chakra-ui/react';
+
+import { Button, ButtonGroup, ChakraProvider ,Center} from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
-import { Chart as ChartJS, registerables } from 'chart.js';
-import { Chart } from 'react-chartjs-2';
 
 import Closing from './closing/closing';
-import Navbar from './navbar';
 import Income from './incomeTable/Income';
 import Spending from './SpendingView/Spending';
 import Openning from './openning/opening';

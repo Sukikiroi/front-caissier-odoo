@@ -33,7 +33,7 @@ const [coinsix, setcoinsix] = useState(0)
 return (
     <>
       <Button onClick={onOpen} ml={60} bg={'#2C9BC8'} color={'white'}>
-        عملة معدنية
+         معدنية
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

@@ -22,7 +22,7 @@ const [papertree, setpapertree] = useState(0)
     <>
  
     <Button onClick={onOpen} ml={70} bg={'#2C9BC8'} color={'white'}>
-                    عملة ورقية
+                     ورقية
                   </Button>
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />

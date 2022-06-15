@@ -13,14 +13,8 @@ import {
 } from '@chakra-ui/react';
 import Fuse from 'fuse.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateData, actiavtesearch,deactiavtesearch } from '../redux/slices';
-import axios from 'axios'
-
-
-
-
-
-
+import { updateData, actiavtesearch, deactiavtesearch } from '../redux/slices';
+import axios from 'axios';
 
 const IncomeFilter = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,9 +25,11 @@ const IncomeFilter = () => {
   const [customernumber, setcustomernumber] = useState(0);
   const [operationnumber, setoperationnumber] = useState('');
   const [time, settime] = useState('');
-  const dofilter = () => {
-    
+  const [door, setdoor] = useState('');
+  const [entrance, setentrance] = useState('');
+  const [section, setsection] = useState('');
 
+  const dofilter = () => {
     // 3. Now search!
     if (datefilter !== '') {
       const fuse = new Fuse(incomedata, {
@@ -41,27 +37,23 @@ const IncomeFilter = () => {
         useExtendedSearch: true,
       });
       dispatch(updateData(fuse.search('=' + datefilter)));
-    }
-   else if (customernumber !== 0) {
-    const fuse = new Fuse(incomedata, {
-      keys: ['client_code'],
-      useExtendedSearch: true,
-    });
-    
+    } else if (customernumber !== 0) {
+      const fuse = new Fuse(incomedata, {
+        keys: ['client_code'],
+        useExtendedSearch: true,
+      });
+
       dispatch(updateData(fuse.search('=' + customernumber)));
     }
     dispatch(actiavtesearch());
   };
 
-
-  const clearfilter =()=>{
-    axios.get(`http://localhost:3004/income`)
-    .then(res => {
+  const clearfilter = () => {
+    axios.get(`http://localhost:3004/income`).then(res => {
       dispatch(updateData(res.data));
       dispatch(deactiavtesearch());
-    })
-
-  }
+    });
+  };
   return (
     <>
       <Button ref={btnRef} onClick={onOpen} bg={'#2C9BC8'}>
@@ -91,9 +83,19 @@ const IncomeFilter = () => {
               onChange={e => setdatefilter(e.target.value)}
             />
             <Input
-              placeholder=" الساعة"
+              placeholder=" الباب"
               mb={30}
-              onChange={e => settime(e.target.value)}
+              onChange={e => setdoor(e.target.value)}
+            />
+            <Input
+              placeholder=" القسم"
+              mb={30}
+              onChange={e => setsection(e.target.value)}
+            />
+            <Input
+              placeholder=" المدخل"
+              mb={30}
+              onChange={e => setentrance(e.target.value)}
             />
             <Input
               placeholder="Type here..."
@@ -107,8 +109,8 @@ const IncomeFilter = () => {
             <Button variant="outline" mr={3} onClick={onClose}>
               الغاء
             </Button>
-            <Button colorScheme="blue" onClick={clearfilter} mr={3} >
-            مسح
+            <Button colorScheme="blue" onClick={clearfilter} mr={3}>
+              مسح
             </Button>
             <Button colorScheme="blue" onClick={dofilter}>
               فيلتر

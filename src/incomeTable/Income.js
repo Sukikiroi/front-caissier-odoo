@@ -46,6 +46,7 @@ import { updateData } from '../redux/slices';
 import IncomeTablefilter from './incomeTablefilter';
 import { FaHome } from 'react-icons/fa';
 import {BiRefresh} from 'react-icons/bi'
+import Printmodal from '../print/Printmodal';
 
 
 const Income = () => {
@@ -113,9 +114,10 @@ const Income = () => {
                     leftIcon={<BiRefresh/>}
                    bg={"#2C9BC8"}
                     variant="solid"
-                  >
-                    Reload
+                  > طباعة
                   </Button>
+
+                  <Printmodal/>
                   <IncomeFilter />
 
                   <NewIncome />

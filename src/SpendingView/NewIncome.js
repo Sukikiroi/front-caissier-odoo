@@ -25,43 +25,785 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Textarea } from '@chakra-ui/react';
 import axios from 'axios';
 import { updateData } from '../redux/slices';
- 
-import {SiWhatsapp} from "react-icons/si"
+
+import { SiWhatsapp } from 'react-icons/si';
 const NewIncome = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const dispatch = useDispatch();
+
+  const [sold, setsold] = useState();
+  const [entrance, setentrance] = useState([]);
+  const [door, setdoor] = useState();
+  const [section, setsection] = useState([]);
+  const [concerned, setconcerned] = useState();
+  const [taxpayer, settaxpayer] = useState();
+  const [description, setdescription] = useState();
+  const [desable, setdesable] = useState(false);
+const [doorname, setdoorname] = useState('')
+const [sectionname, setsectioname] = useState('')
+const [entrancename, setentrancename] = useState('')
+
+  let doors = [
+    {
+      id: 1,
+      name: 'المنزل',
+      sections: [
+        {
+          id: 1,
+          name: 'أمي',
+          entrances: [
+            {
+              id: 1,
+              name: 'المال نقدا ',
+            },
+            {
+              id: 2,
+              name: 'حاجيات المنزل ',
+            },
+            {
+              id: 3,
+              name: 'الطبيب ',
+            },
+            {
+              id: 4,
+              name: 'الدواء ',
+            },
+            {
+              id: 5,
+              name: 'التحاليل ',
+            },
+            {
+              id: 6,
+              name: 'الصيانة ',
+            },
+            {
+              id: 7,
+              name: 'الكهرباء ',
+            },
+            {
+              id: 8,
+              name: 'الماء ',
+            },
+            {
+              id: 9,
+              name: 'التسوق ',
+            },
+            {
+              id: 10,
+              name: 'التبرع ',
+            },
+            {
+              id: 11,
+              name: 'التجهيز ',
+            },
+            {
+              id: 12,
+              name: 'الهاتف ',
+            },
+            {
+              id: 13,
+              name: 'السفر ',
+            },
+            {
+              id: 14,
+              name: 'الضيافة ',
+            },
+          ],
+        },
+  
+        {
+          id: 2,
+          name: 'الأسرة الكبيرة',
+          entrances: [
+            {
+              id: 1,
+              name: 'أم محمد علي ',
+            },
+            {
+              id: 2,
+              name: 'أم يحي ',
+            },
+            {
+              id: 3,
+              name: 'أم أنيس ',
+            },
+            {
+              id: 4,
+              name: 'أم محمد الطيب ',
+            },
+            {
+              id: 5,
+              name: 'أم مهدي ',
+            },
+            {
+              id: 6,
+              name: 'أم أمير ',
+            },
+          ],
+        },
+  
+        {
+          id: 3,
+          name: 'الميراث',
+          entrances: [
+            {
+              id: 1,
+              name: 'أتعاب ',
+            },
+            {
+              id: 2,
+              name: 'دين سابق ',
+            },
+          ],
+        },
+        {
+          id: 4,
+          name: ' بلعابد فارس ',
+          entrances: [
+            {
+              id: 1,
+              name: 'المال نقدا ',
+            },
+            {
+              id: 2,
+              name: 'الضريبة ',
+            },
+            {
+              id: 3,
+              name: 'التأمين ',
+            },
+            {
+              id: 4,
+              name: 'الرخصة ',
+            },
+            {
+              id: 5,
+              name: 'الغرامة ',
+            },
+            {
+              id: 6,
+              name: 'الايجار ',
+            },
+            {
+              id: 7,
+              name: 'النفقة ',
+            },
+            {
+              id: 8,
+              name: 'الاتعاب ',
+            },
+          ],
+        },
+        {
+          id: 5,
+          name: 'بلعابد عيسى',
+          entrances: [
+            {
+              id: 1,
+              name: 'المال نقدا ',
+            },
+            {
+              id: 2,
+              name: 'حاجيات المنزل ',
+            },
+            {
+              id: 3,
+              name: 'الطبيب ',
+            },
+            {
+              id: 4,
+              name: 'الدواء ',
+            },
+            {
+              id: 5,
+              name: 'التحاليل ',
+            },
+            {
+              id: 6,
+              name: 'الصيانة ',
+            },
+            {
+              id: 7,
+              name: 'الكهرباء ',
+            },
+            {
+              id: 8,
+              name: 'الانترنات ',
+            },
+            {
+              id: 9,
+              name: 'الماء ',
+            },
+            {
+              id: 10,
+              name: 'التسوق ',
+            },
+            {
+              id: 11,
+              name: 'الضيافة ',
+            },
+            {
+              id: 12,
+              name: 'التبرع ',
+            },
+            {
+              id: 13,
+              name: 'التجهيز ',
+            },
+            {
+              id: 14,
+              name: 'الاشتراك ',
+            },
+            {
+              id: 15,
+              name: 'السفر ',
+            },
+            {
+              id: 16,
+              name: 'الهاتف ',
+            },
+          ],
+        },
+        {
+          id: 6,
+          name: ' بلعابد برهان الدين',
+          entrances: [
+            {
+              id: 1,
+              name: 'المال نقدا ',
+            },
+            {
+              id: 2,
+              name: 'حاجيات المنزل ',
+            },
+            {
+              id: 3,
+              name: 'الطبيب ',
+            },
+            {
+              id: 4,
+              name: 'الدواء ',
+            },
+            {
+              id: 5,
+              name: 'التحاليل ',
+            },
+            {
+              id: 6,
+              name: 'الصيانة ',
+            },
+            {
+              id: 7,
+              name: 'الكهرباء ',
+            },
+            {
+              id: 8,
+              name: 'الانترنات ',
+            },
+            {
+              id: 9,
+              name: 'الماء ',
+            },
+            {
+              id: 10,
+              name: 'التسوق ',
+            },
+            {
+              id: 11,
+              name: 'الضيافة ',
+            },
+            {
+              id: 12,
+              name: 'التبرع ',
+            },
+            {
+              id: 13,
+              name: 'التجهيز ',
+            },
+            {
+              id: 14,
+              name: 'الاشتراك ',
+            },
+            {
+              id: 15,
+              name: 'السفر ',
+            },
+            {
+              id: 16,
+              name: 'الهاتف ',
+            },
+          ],
+        },
+      ],
+    },
+  
+    {
+      id: 2,
+      name: 'الشركة',
+      sections: [
+        {
+          id: 1,
+          name: 'الخدمات و الأجرة ',
+          entrances: [
+            {
+              id: 1,
+              name: 'النقل ',
+            },
+            {
+              id: 2,
+              name: 'الكراء ',
+            },
+            {
+              id: 3,
+              name: 'الصيانة ',
+            },
+            {
+              id: 4,
+              name: 'التنضيف ',
+            },
+            {
+              id: 5,
+              name: 'تحويل المال ',
+            },
+            {
+              id: 6,
+              name: 'الوقود ',
+            },
+          ],
+        },
+        {
+          id: 2,
+          name: 'الرسوم و الاشتراكات ',
+          entrances: [
+            {
+              id: 1,
+              name: 'الضريبة  ',
+            },
+            {
+              id: 2,
+              name: 'التأمين  ',
+            },
+            {
+              id: 3,
+              name: 'الرخصة  ',
+            },
+            {
+              id: 4,
+              name: 'الغرامة  ',
+            },
+            {
+              id: 5,
+              name: ' الاتعاب  ',
+            },
+          ],
+        },
+        {
+          id: 3,
+          name: 'التجهيز و التسير ',
+          entrances: [
+            {
+              id: 1,
+              name: 'تجهيز المخزن  ',
+            },
+            {
+              id: 2,
+              name: 'لوازم المخازن  ',
+            },
+            {
+              id: 3,
+              name: 'تجهيز المكاتب  ',
+            },
+            {
+              id: 4,
+              name: 'لوازم مكتبية  ',
+            },
+            {
+              id: 5,
+              name: ' تجهيز الورشة  ',
+            },
+            {
+              id: 6,
+              name: 'لوازم الورشة  ',
+            },
+          ],
+        },
+        {
+          id: 4,
+          name: 'التكاليف و المهمات ',
+          entrances: [
+            {
+              id: 1,
+              name: 'الدعوة  ',
+            },
+            {
+              id: 2,
+              name: 'الاستدعاء  ',
+            },
+          ],
+        },
+        {
+          id: 5,
+          name: 'التشريفات ',
+          entrances: [
+            {
+              id: 1,
+              name: 'المطعم  ',
+            },
+            {
+              id: 2,
+              name: 'المقهى  ',
+            },
+            {
+              id: 3,
+              name: 'الفندق  ',
+            },
+          ],
+        },
+        {
+          id: 6,
+          name: 'الفواتير ',
+          entrances: [
+            {
+              id: 1,
+              name: 'الكهرباء  ',
+            },
+            {
+              id: 2,
+              name: 'الانترنيت  ',
+            },
+            {
+              id: 3,
+              name: 'الهاتف ااثابت  ',
+            },
+            {
+              id: 4,
+              name: 'الهاتف النقال  ',
+            },
+            {
+              id: 5,
+              name: 'الماء   ',
+            },
+            {
+              id: 6,
+              name: 'الايجار  ',
+            },
+          ],
+        },
+        {
+          id: 7,
+          name: 'التبرعات و الهدايا ',
+          entrances: [
+            {
+              id: 1,
+              name: 'الصدقة  ',
+            },
+            {
+              id: 2,
+              name: 'الهدية  ',
+            },
+            {
+              id: 3,
+              name: 'الزكاة  ',
+            },
+            {
+              id: 4,
+              name: 'الرعاية  ',
+            },
+          ],
+        },
+      ],
+    },
+  
+    {
+      id: 3,
+      name: 'الشريك',
+      sections: [
+        {
+          id: 1,
+          name: 'بلعابد برهان الدين ',
+          entrances: [
+            {
+              id: 1,
+              name: 'مال نقدا ',
+            },
+            {
+              id: 2,
+              name: 'سلعة ',
+            },
+            {
+              id: 3,
+              name: 'خدمات و أتعاب ',
+            },
+          ],
+        },
+        {
+          id: 2,
+          name: 'بقاق عومار ',
+          entrances: [
+            {
+              id: 1,
+              name: 'مال نقدا ',
+            },
+            {
+              id: 2,
+              name: 'سلعة ',
+            },
+            {
+              id: 3,
+              name: 'خدمات و أتعاب ',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 4,
+      name: 'الحضيرة',
+      sections: [
+        {
+          id: 1,
+          name: 'جاك 1',
+          entrances: [
+            {
+              id: 1,
+              name: 'الوقود ',
+            },
+            {
+              id: 2,
+              name: 'االصيانة ',
+            },
+            {
+              id: 3,
+              name: 'التصليح ',
+            },
+            {
+              id: 4,
+              name: 'التأمين ',
+            },
+          ],
+        },
+        {
+          id: 2,
+          name: 'جاك 2',
+          entrances: [
+            {
+              id: 1,
+              name: 'الوقود ',
+            },
+            {
+              id: 2,
+              name: 'االصيانة ',
+            },
+            {
+              id: 3,
+              name: 'التصليح ',
+            },
+            {
+              id: 4,
+              name: 'التأمين ',
+            },
+          ],
+        },
+        {
+          id: 3,
+          name: 'جاك 3',
+          entrances: [
+            {
+              id: 1,
+              name: 'الوقود ',
+            },
+            {
+              id: 2,
+              name: 'االصيانة ',
+            },
+            {
+              id: 3,
+              name: 'التصليح ',
+            },
+            {
+              id: 4,
+              name: 'التأمين ',
+            },
+          ],
+        },
+        {
+          id: 4,
+          name: 'شاحنة الرفع 2طن ',
+          entrances: [
+            {
+              id: 1,
+              name: 'الوقود ',
+            },
+            {
+              id: 2,
+              name: 'االصيانة ',
+            },
+            {
+              id: 3,
+              name: 'التصليح ',
+            },
+            {
+              id: 4,
+              name: 'التأمين ',
+            },
+          ],
+        },
+        {
+          id: 5,
+          name: 'شاحنة الرفع 3طن ',
+          entrances: [
+            {
+              id: 1,
+              name: 'الوقود ',
+            },
+            {
+              id: 2,
+              name: 'االصيانة ',
+            },
+            {
+              id: 3,
+              name: 'التصليح ',
+            },
+            {
+              id: 4,
+              name: 'التأمين ',
+            },
+          ],
+        },
+        {
+          id: 6,
+          name: 'سيارة برهان ',
+          entrances: [
+            {
+              id: 1,
+              name: 'الوقود ',
+            },
+            {
+              id: 2,
+              name: 'االصيانة ',
+            },
+            {
+              id: 3,
+              name: 'التصليح ',
+            },
+            {
+              id: 4,
+              name: 'التأمين ',
+            },
+          ],
+        },
+        {
+          id: 7,
+          name: 'سيارة عيسى ',
+          entrances: [
+            {
+              id: 1,
+              name: 'الوقود ',
+            },
+            {
+              id: 2,
+              name: 'االصيانة ',
+            },
+            {
+              id: 3,
+              name: 'التصليح ',
+            },
+            {
+              id: 4,
+              name: 'التأمين ',
+            },
+          ],
+        },
+        {
+          id: 8,
+          name: 'شاحنة شيري ',
+          entrances: [
+            {
+              id: 1,
+              name: 'الوقود ',
+            },
+            {
+              id: 2,
+              name: 'االصيانة ',
+            },
+            {
+              id: 3,
+              name: 'التصليح ',
+            },
+            {
+              id: 4,
+              name: 'التأمين ',
+            },
+          ],
+        },
+       
+      ],
+    },
+    {
+      id: 5,
+      name: 'الاستتمار',
+      sections: [
+        {
+          id: 1,
+          name: 'section one',
+          entrances: [
+            {
+              id: 1,
+              name: 'الوقود ',
+            },
+            {
+              id: 2,
+              name: 'االصيانة ',
+            },
+            {
+              id: 3,
+              name: 'التصليح ',
+            },
+            {
+              id: 4,
+              name: 'التأمين ',
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+   const handledoors=(id)=>{
+     // this all sections of that door
+    setsection(doors.filter(item=>item.id==id)[0]['sections'])
+    setdoorname(doors.filter(item=>item.id==id)[0].name)
+
+   }
+const handlesections=(id)=>{
+  setentrance(section.filter(item=>item.id==id)[0]['entrances'])
+  
+  setsectioname( section.filter(item=>item.id==id)[0].name)
+
+  
+}
+
+const handleentrances=(id)=>{
+  setentrancename(entrance.filter(item=>item.id==id)[0].name)
  
-const [sold, setsold] = useState()
-const [entrance, setentrance] = useState()
-const [door, setdoor] = useState()
-const [section, setsection] = useState()
-const [concerned, setconcerned] = useState()
-const [taxpayer, settaxpayer] = useState()
-const [description, setdescription] = useState()
-const [desable, setdesable] = useState(false)
-
-
-
+}
   const newspending = {
-    entrance: entrance,
-    door: door,
-    section: section,
+    entrance: entrancename,
+    door: doorname,
+    section: sectionname,
     description: description,
     sold: sold,
     concerned: concerned,
     taxpayer: taxpayer,
- 
   };
 
   const sendIncome = () => {
     console.log(newspending);
-    axios
-      .post(`http://localhost:3004/spending/new`, newspending)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      });
+    axios.post(`http://localhost:3004/spending/new`, newspending).then(res => {
+      console.log(res);
+      console.log(res.data);
+    });
 
     toast({
       title: 'Account created.',
@@ -75,19 +817,19 @@ const [desable, setdesable] = useState(false)
 
   const closeme = () => {
     axios.get(`http://localhost:3004/spending`).then(res => {
-      dispatch(updateData(res.data.reverse()));
+      dispatch(updateData(res.data));
     });
+
     setdesable(false);
-    onClose();
+    setTimeout(onClose(),5000) 
+    
   };
   return (
     <>
       <Button onClick={onOpen} bg={'#2C9BC8'}>
-        <Heading as='h5' size='sm'>
-        جديد
-
-  </Heading>
-        
+        <Heading as="h5" size="sm">
+          جديد
+        </Heading>
       </Button>
       <Modal isOpen={isOpen} onClose={closeme}>
         <ModalOverlay />
@@ -96,48 +838,45 @@ const [desable, setdesable] = useState(false)
           <ModalCloseButton />
           <ModalBody>
             <Box h={450} bg={'white'}>
-
               <Box display={'flex'} justifyContent={'flex-end'}>
-              
-      <Button colorScheme='whatsapp' leftIcon={<SiWhatsapp />}>
-      اشعار المسؤل
-
-  </Button> 
+                <Button colorScheme="whatsapp" leftIcon={<SiWhatsapp />}>
+                  اشعار المسؤل
+                </Button>
               </Box>
-         
-      <br></br> 
-      <br></br> 
-      <br></br> 
+
+              <br></br>
+              <br></br>
+              <br></br>
               <VStack>
                 <HStack>
-                  <Select
+                  <Select 
                     w={'50%'}
-                    placeholder=" القسم"
-                    onChange={e => setsection(e.target.value)}
+                    placeholder=" الباب"
+                    onChange={e => handledoors(e.target.value)}
                   >
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                    {doors.map((door, key) => {
+                      return <option value={door.id}>{door.name}</option>;
+                    })}
                   </Select>
 
                   <Select
                     w={'50%'}
-                    placeholder=" الباب"
-                    onChange={e => setdoor(e.target.value)}
+                    placeholder="القسم "
+                    onChange={e => handlesections(e.target.value)}
                   >
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                    {section.map((item, key) => {
+                      return <option value={item.id}>{item.name}</option>;
+                    })}
                   </Select>
                 </HStack>
                 <Select
                   w={'100%'}
                   placeholder=" المدخل"
-                  onChange={e => setentrance(e.target.value)}
+                  onChange={e => handleentrances(e.target.value)}
                 >
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                  {entrance.map((item, key) => {
+                      return <option value={item.id}>{item.name}</option>;
+                    })}
                 </Select>
                 <Flex>
                   <Spacer />
@@ -160,14 +899,17 @@ const [desable, setdesable] = useState(false)
                   />
                   <Spacer />
                   <Input
-                  value={JSON.parse(localStorage.getItem('log')).name}
+                    value={JSON.parse(localStorage.getItem('log')).name}
                     placeholder="                اسم أمين الصندوق"
                     _placeholder={{ opacity: 1, color: 'black' }}
                   />
                 </Flex>
 
                 <Box w={'100%'} bg={''} h={'30'}>
-                  <Textarea placeholder=" ملاحظة"    onChange={e => setdescription(e.target.value)}  />
+                  <Textarea
+                    placeholder=" ملاحظة"
+                    onChange={e => setdescription(e.target.value)}
+                  />
                 </Box>
               </VStack>
             </Box>

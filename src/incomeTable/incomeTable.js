@@ -30,7 +30,7 @@ const IncomeTable = ({ data }) => {
               <Tr color={'white'}>
                 <Th color={'white'}>الساعة</Th>
                 <Th color={'white'}>التاريخ</Th>
-                <Th color={'white'}>الرصيد المدخول</Th>
+                <Th color={'white'}> المبلغ</Th>
                 <Th color={'white'}>رقم العملية</Th>
                 <Th color={'white'}>رقم العميل</Th>
                 <Th color={'white'}> صنف 2000</Th>

@@ -14,8 +14,12 @@ import {
   import {HiOutlinePrinter} from "react-icons/hi"
   import { PDFViewer } from '@react-pdf/renderer';
 import Template from './Template';
+import { useSelector } from 'react-redux';
 const Printmodal = ({time,date,balance,operation,customer,paperone,papertwo,papertree,paperfour,coinone,cointwo,cointree,coinsix}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const resultData = useSelector(state => state.settings.resultData);
+  
   return (
     <>
       <Button onClick={onOpen}>
@@ -42,7 +46,7 @@ const Printmodal = ({time,date,balance,operation,customer,paperone,papertwo,pape
             <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant='ghost'>Secondary Action</Button>
+            <Button variant='ghost' onClick={()=>  console.log(resultData)}>Print</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

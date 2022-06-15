@@ -18,12 +18,11 @@ import UpdateIncome from './UpdateIncome';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
-import {HiOutlinePrinter} from "react-icons/hi"
-const IncomeTable = ({ data }) => {
-
- 
+import { HiOutlinePrinter } from 'react-icons/hi';
+import Printmodal from '../print/Printmodal';
+const Spendingtable = ({ data }) => {
   return (
-    <Container maxW="1000px" bg="black.600" color="black">
+    <Container maxW="1450px" bg="black.600" color="black">
       <TableContainer border={'4px solid #2C9BC8'} borderRadius={'5'}>
         <Table variant="simple">
           <PerfectScrollbar>
@@ -31,13 +30,14 @@ const IncomeTable = ({ data }) => {
               <Tr color={'white'}>
                 <Th color={'white'}>الساعة</Th>
                 <Th color={'white'}>التاريخ</Th>
-                <Th color={'white'}>الرصيد </Th>
-                <Th color={'white'}>القسم </Th>
-                <Th color={'white'}> الباب</Th>
-                <Th color={'white'}>  المدخل</Th>
-                <Th color={'white'}>  المكلف</Th>
-                <Th color={'white'}>  المعني</Th>
-                <Th color={'white'}>  </Th>
+                <Th color={'white'}>المبلغ </Th>
+                <Th color={'white'}>الباب </Th>
+                <Th color={'white'}> القسم</Th>
+                <Th color={'white'}> المدخل</Th>
+                <Th color={'white'}> المكلف</Th>
+                <Th color={'white'}> المعني</Th>
+                <Th color={'white'}>الملاحظة </Th>
+                <Th color={'white'}> الاجراءات</Th>
                 <Th color={'white'}> </Th>
               </Tr>
             </Thead>
@@ -46,22 +46,27 @@ const IncomeTable = ({ data }) => {
                 return (
                   <Tr key={key}>
                     <Td>{income.time}</Td>
-                    <Td>{income.date}</Td>
-                    <Td>{income.balance}</Td>
-                    <Td>{income.operation_code}</Td>
-                    <Td>{income.client_code}</Td>
+                    <Td>{income.create_date}</Td>
+                    <Td>{income.sold}</Td>
+                    <Td>{income.door}</Td>
+                    <Td>{income.section}</Td>
 
-                    <Td>{income.first_qty}</Td>
-                    <Td>{income.seconde_qty}</Td>
-                    <Td>{income.tree_qty}</Td>
-                    <Td>{income.four_qty}</Td>
+                    <Td>{income.entrance}</Td>
+                    <Td>{income.taxpayer}</Td>
+                    <Td>{income.concerned}</Td>
+                    <Td>{income.description}</Td>
 
                     <Td>
                       <HStack>
                         <DeleteIncome Incomeid={income.id} />
                         <UpdateIncome Incomeid={income.id} />
-                        h
-                        <HiOutlinePrinter color='blue'/>
+
+                        <Printmodal
+                          w={900}
+                          h={600}
+                          time={income.time}
+                          date={income.date}
+                        />
                       </HStack>
                     </Td>
                   </Tr>
@@ -75,4 +80,4 @@ const IncomeTable = ({ data }) => {
   );
 };
 
-export default IncomeTable;
+export default Spendingtable;
