@@ -22,7 +22,7 @@ import { HiOutlinePrinter } from 'react-icons/hi';
 import Printmodal from '../print/Printmodal';
 const Spendingtable = ({ data }) => {
   return (
-    <Container maxW="1450px" bg="black.600" color="black">
+    <Container bg="black.600"  maxW={'1200px'}  color="black">
       <TableContainer border={'4px solid #2C9BC8'} borderRadius={'5'}>
         <Table variant="simple">
           <PerfectScrollbar>
@@ -61,12 +61,7 @@ const Spendingtable = ({ data }) => {
                         <DeleteIncome Incomeid={income.id} />
                         <UpdateIncome Incomeid={income.id} />
 
-                        <Printmodal
-                          w={900}
-                          h={600}
-                          time={income.time}
-                          date={income.date}
-                        />
+                       
                       </HStack>
                     </Td>
                   </Tr>

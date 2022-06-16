@@ -14,7 +14,7 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import * as React from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,49 +23,55 @@ import { Logo } from './Logo';
 import { OAuthButtonGroup } from './OAuthButtonGroup';
 import { PasswordField } from './PasswordField';
 import axios from 'axios';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+
+
+
+
+
+
 const Login = () => {
   let navigate = useNavigate();
   const [wrong, setwrong] = useState(false);
   const username = useSelector(state => state.settings.username);
   const password = useSelector(state => state.settings.password);
+
+
+
   const submitlogin = () => {
     console.log(username);
     console.log(password);
 
     axios
-      .post(`http://localhost:3004/login`, {
+      .post('http://localhost:3004/login', {
         username: username,
         password: password,
       })
-      .then(res => {
-        if (res.status === 200) {
-          setwrong(false);
-          console.log(res.data[0].company_id);
-          navigate("/home", { replace: true });
-          localStorage.setItem(
-            'log',
-            JSON.stringify({
-              username: username,
-              password: password,
-              company:res.data[0].company_id[1],
-              name:res.data[0].name,
-            })
-          )
-        }
-       
-        
-         
-        
+      .then(function (response) {
+        console.log(response);
+        navigate('/home', { replace: true });
+
+        localStorage.setItem(
+          'log',
+          JSON.stringify({
+            username: username,
+            password: password,
+            company: response.data[0].company_id[1],
+            name: response.data[0].name,
+          })
+        );
+      })
+      .catch(function (error) {
+        console.log(error);
+        setwrong(true);
       });
-      console.log('bahahaha')
-      setwrong(true);
   };
 
   const dispatch = useDispatch();
   return (
     <Container
-      bg={'white.50'}
-      maxW="lg"
+      bg={'white'}
+    maxW='lg'
       py={{
         base: '12',
         md: '24',
@@ -74,11 +80,14 @@ const Login = () => {
         base: '0',
         sm: '8',
       }}
+
+     
+     
     >
-      <Stack spacing="8">
-        <Stack spacing="6">
-         
-          <Stack
+    
+      <Stack spacing="8" >
+        <Stack spacing="6" >
+          <Stack 
             spacing={{
               base: '2',
               md: '3',
@@ -96,7 +105,7 @@ const Login = () => {
             <HStack spacing="1" justify="center"></HStack>
           </Stack>
         </Stack>
-        <Box
+        <Box 
           py={{
             base: '0',
             sm: '8',
@@ -106,7 +115,7 @@ const Login = () => {
             sm: '10',
           }}
           bg={useBreakpointValue({
-            base: 'transparent',
+            base: 'tomato',
             sm: 'bg-surface',
           })}
           boxShadow={{
@@ -118,7 +127,7 @@ const Login = () => {
             sm: 'xl',
           }}
         >
-          <Stack spacing="6">
+          <Stack spacing="6" >
             <Stack spacing="5">
               <FormControl>
                 <FormLabel htmlFor="email">اسم االمستخدم</FormLabel>

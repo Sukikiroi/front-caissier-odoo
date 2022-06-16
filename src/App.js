@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import { Button, ButtonGroup, ChakraProvider ,Center} from '@chakra-ui/react';
+import { Button, ButtonGroup, ChakraProvider ,Center,Box} from '@chakra-ui/react';
 import { Routes, Route } from 'react-router-dom';
 
 import Closing from './closing/closing';
@@ -23,6 +23,8 @@ import { Provider } from 'react-redux';
 
 import { PDFViewer } from '@react-pdf/renderer';
 import Settings from './settings/Settings';
+
+
 function App() {
   return (
     <ChakraProvider theme={theme}>
@@ -34,7 +36,13 @@ function App() {
           <Route path="/openning" element={<Openning />} />
           <Route path="/reporting" element={<Reporting />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={
+          <Box w={'100%'}  h={'1400px'} bg='white' >
+ <Login/>
+          </Box>
+         
+          
+          } />
           <Route path="/" element={<Login />} />
           <Route path="/settings" element={<Settings />} />
           <Route

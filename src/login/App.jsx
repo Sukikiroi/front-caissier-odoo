@@ -18,6 +18,8 @@ import * as React from 'react'
 import { Logo } from './Logo'
 import { OAuthButtonGroup } from './OAuthButtonGroup'
 import { PasswordField } from './PasswordField'
+import wallpaper from "./wallpaper.png"
+
 
 export const App = () => (
   <Container
@@ -30,6 +32,8 @@ export const App = () => (
       base: '0',
       sm: '8',
     }}
+    backgroundImage= { `url(${wallpaper})` }
+    backgroundSize="cover"
   >
     <Stack spacing="8">
       <Stack spacing="6">

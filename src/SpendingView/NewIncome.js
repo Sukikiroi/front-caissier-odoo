@@ -26,6 +26,14 @@ import { Textarea } from '@chakra-ui/react';
 import axios from 'axios';
 import { updateData } from '../redux/slices';
 
+import {
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+} from '@chakra-ui/react';
+
 import { SiWhatsapp } from 'react-icons/si';
 const NewIncome = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,9 +48,9 @@ const NewIncome = () => {
   const [taxpayer, settaxpayer] = useState();
   const [description, setdescription] = useState();
   const [desable, setdesable] = useState(false);
-const [doorname, setdoorname] = useState('')
-const [sectionname, setsectioname] = useState('')
-const [entrancename, setentrancename] = useState('')
+  const [doorname, setdoorname] = useState('');
+  const [sectionname, setsectioname] = useState('');
+  const [entrancename, setentrancename] = useState('');
 
   let doors = [
     {
@@ -111,7 +119,7 @@ const [entrancename, setentrancename] = useState('')
             },
           ],
         },
-  
+
         {
           id: 2,
           name: 'الأسرة الكبيرة',
@@ -142,7 +150,7 @@ const [entrancename, setentrancename] = useState('')
             },
           ],
         },
-  
+
         {
           id: 3,
           name: 'الميراث',
@@ -337,7 +345,7 @@ const [entrancename, setentrancename] = useState('')
         },
       ],
     },
-  
+
     {
       id: 2,
       name: 'الشركة',
@@ -514,7 +522,7 @@ const [entrancename, setentrancename] = useState('')
         },
       ],
     },
-  
+
     {
       id: 3,
       name: 'الشريك',
@@ -737,7 +745,6 @@ const [entrancename, setentrancename] = useState('')
             },
           ],
         },
-       
       ],
     },
     {
@@ -770,24 +777,20 @@ const [entrancename, setentrancename] = useState('')
     },
   ];
 
-   const handledoors=(id)=>{
-     // this all sections of that door
-    setsection(doors.filter(item=>item.id==id)[0]['sections'])
-    setdoorname(doors.filter(item=>item.id==id)[0].name)
+  const handledoors = id => {
+    // this all sections of that door
+    setsection(doors.filter(item => item.id == id)[0]['sections']);
+    setdoorname(doors.filter(item => item.id == id)[0].name);
+  };
+  const handlesections = id => {
+    setentrance(section.filter(item => item.id == id)[0]['entrances']);
 
-   }
-const handlesections=(id)=>{
-  setentrance(section.filter(item=>item.id==id)[0]['entrances'])
-  
-  setsectioname( section.filter(item=>item.id==id)[0].name)
+    setsectioname(section.filter(item => item.id == id)[0].name);
+  };
 
-  
-}
-
-const handleentrances=(id)=>{
-  setentrancename(entrance.filter(item=>item.id==id)[0].name)
- 
-}
+  const handleentrances = id => {
+    setentrancename(entrance.filter(item => item.id == id)[0].name);
+  };
   const newspending = {
     entrance: entrancename,
     door: doorname,
@@ -821,8 +824,7 @@ const handleentrances=(id)=>{
     });
 
     setdesable(false);
-    setTimeout(onClose(),5000) 
-    
+    setTimeout(onClose(), 5000);
   };
   return (
     <>
@@ -849,7 +851,7 @@ const handleentrances=(id)=>{
               <br></br>
               <VStack>
                 <HStack>
-                  <Select 
+                  <Select
                     w={'50%'}
                     placeholder=" الباب"
                     onChange={e => handledoors(e.target.value)}
@@ -875,16 +877,23 @@ const handleentrances=(id)=>{
                   onChange={e => handleentrances(e.target.value)}
                 >
                   {entrance.map((item, key) => {
-                      return <option value={item.id}>{item.name}</option>;
-                    })}
+                    return <option value={item.id}>{item.name}</option>;
+                  })}
                 </Select>
                 <Flex>
                   <Spacer />
-                  <Input
-                    onChange={e => setsold(e.target.value)}
-                    placeholder="                الرصيد"
-                    _placeholder={{ opacity: 1, color: 'black' }}
-                  />
+
+                  <NumberInput>
+                    <NumberInputField
+                      onChange={e => setsold(e.target.value)}
+                      placeholder="                الرصيد"
+                    />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
+
                   <Input
                     onChange={e => setconcerned(e.target.value)}
                     placeholder="                المعني"

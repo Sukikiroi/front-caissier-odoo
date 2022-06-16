@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {
     Modal,
     ModalOverlay,
@@ -15,15 +15,27 @@ import {
   import { PDFViewer } from '@react-pdf/renderer';
 import Template from './Template';
 import { useSelector } from 'react-redux';
+import { FcPrint } from 'react-icons/fc';
 const Printmodal = ({time,date,balance,operation,customer,paperone,papertwo,papertree,paperfour,coinone,cointwo,cointree,coinsix}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+const [totalsold, settotalsold] = useState(0)
+
     const resultData = useSelector(state => state.settings.resultData);
-  
+  const handlprint=()=>{
+    onOpen()
+    let totalsold=0
+    for (let i = 0; i < resultData.length; i++) {
+      totalsold=resultData[i].sold+totalsold
+    } 
+
+    settotalsold(totalsold)
+  }
   return (
     <>
-      <Button onClick={onOpen}>
-          <HiOutlinePrinter color={'blue.300'}/>
+      <Button onClick={handlprint}   leftIcon={<FcPrint />}
+                     bg={'#2C9BC8'}>
+         طباعة
           
       </Button>
 
@@ -37,7 +49,7 @@ const Printmodal = ({time,date,balance,operation,customer,paperone,papertwo,pape
 
              
           <PDFViewer style={{ width: '900px', height: '600px' }}>
-                  <Template time={time} date={date} />
+                  <Template time={time} date={date} totalsold={totalsold} />
                 </PDFViewer>
                 </Center>
           </ModalBody>
@@ -46,7 +58,7 @@ const Printmodal = ({time,date,balance,operation,customer,paperone,papertwo,pape
             <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant='ghost' onClick={()=>  console.log(resultData)}>Print</Button>
+            <Button variant='ghost' onClick={handlprint}>Print</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

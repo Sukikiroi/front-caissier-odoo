@@ -45,6 +45,7 @@ import { FcPrint } from 'react-icons/fc';
 import { BiRefresh } from 'react-icons/bi';
 
 import Spendingtable from './Table';
+import Printmodal from '../print/Printmodal';
 
 const Income = () => {
   const resultData = useSelector(state => state.settings.resultData);
@@ -101,27 +102,25 @@ const Income = () => {
               <Box w={'100%'} mt={30}>
                 <HStack>
                   <Spacer />
-                  <Button
-                    onClick={reloaddata}
-                    leftIcon={<FcPrint />}
-                    bg={'#2C9BC8'}
-                    variant="solid"
-                  >
-                    طباعة
-                  </Button>
+                  <Printmodal/>
+                
+
+
+
+                  
                   <IncomeFilter />
 
                   <NewIncome />
                 </HStack>
               </Box>
-              <Box bg={'white'} w={'100%'}>
+            
                 {searchactivate ? (
                   <IncomeTablefilter data={resultData} />
                 ) : (
                   <Spendingtable data={dataincome} />
                  // <Spendingtable />
                 )}
-              </Box>
+           
             </VStack>
           </Box>
         </VStack>
