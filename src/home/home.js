@@ -36,7 +36,7 @@ const Home = () => {
               </Center>
             </GridItem>
         
-          <GridItem w="150px" h="150" bg="blue.200" boxShadow="md" rounded="md">
+          <GridItem w="150px" h="150" bg="blue.200" boxShadow="md">
             <Image
               boxSize="150px"
               objectFit="cover"

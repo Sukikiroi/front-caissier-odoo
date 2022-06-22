@@ -16,7 +16,12 @@ import {
 import Template from './Template';
 import { useSelector } from 'react-redux';
 import { FcPrint } from 'react-icons/fc';
-const Printmodal = ({time,date,balance,operation,customer,paperone,papertwo,papertree,paperfour,coinone,cointwo,cointree,coinsix}) => {
+import Invoice from './components/reports/Invoice';
+import invoice from "./data/invoice"
+
+
+
+const Printmodal = ({data}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
 const [totalsold, settotalsold] = useState(0)
@@ -48,17 +53,17 @@ const [totalsold, settotalsold] = useState(0)
               <Center size={ '5xl'}>
 
              
-          <PDFViewer style={{ width: '900px', height: '600px' }}>
-                  <Template time={time} date={date} totalsold={totalsold} />
-                </PDFViewer>
+              <PDFViewer width="1000" height="600" className="app" >
+                <Invoice invoice={data}/>
+            </PDFViewer>
                 </Center>
           </ModalBody>
 
           <ModalFooter>
             <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
+              الغاء
             </Button>
-            <Button variant='ghost' onClick={handlprint}>Print</Button>
+            <Button variant='ghost' onClick={handlprint}>طباعة</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -32,7 +32,8 @@ import { Button, ButtonGroup } from '@chakra-ui/react';
 
 import IncomeFilter from './IncomeFilter';
 import NewIncome from './NewIncome';
-
+import ReactDOM from "react-dom";
+import Pdf from "react-to-pdf";
 
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
@@ -46,8 +47,11 @@ import { BiRefresh } from 'react-icons/bi';
 
 import Spendingtable from './Table';
 import Printmodal from '../print/Printmodal';
+import PdfTemplate from './PdfTemplate';
+import Printingmodal from './Printingmodal';
 
 const Income = () => {
+   
   const resultData = useSelector(state => state.settings.resultData);
   const searchactivate = useSelector(state => state.settings.searchactivate);
   const dispatch = useDispatch();
@@ -102,11 +106,12 @@ const Income = () => {
               <Box w={'100%'} mt={30}>
                 <HStack>
                   <Spacer />
-                  <Printmodal/>
-                
 
+            
+         
 
-
+<Printingmodal  data={dataincome}/>
+    
                   
                   <IncomeFilter />
 
@@ -117,7 +122,7 @@ const Income = () => {
                 {searchactivate ? (
                   <IncomeTablefilter data={resultData} />
                 ) : (
-                  <Spendingtable data={dataincome} />
+                  <Spendingtable data={resultData} />
                  // <Spendingtable />
                 )}
            

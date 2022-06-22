@@ -69,7 +69,7 @@ const IncomeFilter = () => {
       </Button>
       <Drawer
         isOpen={isOpen}
-        placement="left"
+        placement='right'
         onClose={onClose}
         finalFocusRef={btnRef}
       >

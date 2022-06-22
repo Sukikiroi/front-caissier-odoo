@@ -22,7 +22,7 @@ const initialState = {
 
   resultData: [],
   searchactivate: false,
-  company:localStorage.getItem('company')[0].companyname
+  company:localStorage.getItem('company')? localStorage.getItem('company')[0].companyname:""
 };
 
 export const settingsSlice = createSlice({

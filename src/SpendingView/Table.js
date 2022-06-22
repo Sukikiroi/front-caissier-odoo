@@ -21,6 +21,7 @@ import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
 import { HiOutlinePrinter } from 'react-icons/hi';
 import Printmodal from '../print/Printmodal';
 const Spendingtable = ({ data }) => {
+  console.log( data)
   return (
     <Container bg="black.600"  maxW={'1200px'}  color="black">
       <TableContainer border={'4px solid #2C9BC8'} borderRadius={'5'}>
@@ -42,24 +43,24 @@ const Spendingtable = ({ data }) => {
               </Tr>
             </Thead>
             <Tbody>
-              {data?.map((income, key) => {
+              {data?.map((spend, key) => {
                 return (
                   <Tr key={key}>
-                    <Td>{income.time}</Td>
-                    <Td>{income.create_date}</Td>
-                    <Td>{income.sold}</Td>
-                    <Td>{income.door}</Td>
-                    <Td>{income.section}</Td>
+                    <Td>{spend.time}</Td>
+                    <Td>{spend.create_date}</Td>
+                    <Td>{spend.sold}</Td>
+                    <Td>{spend.door}</Td>
+                    <Td>{spend.section}</Td>
 
-                    <Td>{income.entrance}</Td>
-                    <Td>{income.taxpayer}</Td>
-                    <Td>{income.concerned}</Td>
-                    <Td>{income.description}</Td>
+                    <Td>{spend.entrance}</Td>
+                    <Td>{spend.taxpayer}</Td>
+                    <Td>{spend.concerned}</Td>
+                    <Td>{spend.description}</Td>
 
                     <Td>
                       <HStack>
-                        <DeleteIncome Incomeid={income.id} />
-                        <UpdateIncome Incomeid={income.id} />
+                        <DeleteIncome Spenddata={spend} />
+                        <UpdateIncome Spendid={spend.id} />
 
                        
                       </HStack>

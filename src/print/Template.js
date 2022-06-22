@@ -92,7 +92,7 @@ const Template = ({
           <Image style={styles.image} src={Door} />
         </View>
 
-        <Table>
+        <Table        >
           <TableHeader textAlign={'center'}>
             <TableCell weighting={0.3}>First Name</TableCell>
             <TableCell weighting={0.3}>Last Name</TableCell>
@@ -100,13 +100,9 @@ const Template = ({
             <TableCell>Country</TableCell>
             <TableCell>Phone Number</TableCell>
           </TableHeader>
-          <TableHeader textAlign={'center'}>
-            <TableCell weighting={0.3}>First Name</TableCell>
-            <TableCell weighting={0.3}>Last Name</TableCell>
-            <TableCell>    <Image style={styles.image} src={Door} /> </TableCell>
-            <TableCell>Country</TableCell>
-            <TableCell>Phone Number</TableCell>
-          </TableHeader>
+          <TableBody>
+          <TableCell>Phone Number</TableCell>
+          </TableBody>
         </Table>
 
         <br></br>

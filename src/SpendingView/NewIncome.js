@@ -802,10 +802,15 @@ const NewIncome = () => {
   };
 
   const sendIncome = () => {
-    console.log(newspending);
+   
     axios.post(`http://localhost:3004/spending/new`, newspending).then(res => {
       console.log(res);
       console.log(res.data);
+      setdesable(true);
+      axios.get(`http://localhost:3004/spending`).then(res => {
+        dispatch(updateData(res.data));
+      });
+      onClose()
     });
 
     toast({
@@ -815,17 +820,15 @@ const NewIncome = () => {
       duration: 9000,
       isClosable: true,
     });
-    setdesable(true);
+   
+
+    setTimeout(() => {
+      setdesable(false);
+    }, "1000")
+    
   };
 
-  const closeme = () => {
-    axios.get(`http://localhost:3004/spending`).then(res => {
-      dispatch(updateData(res.data));
-    });
-
-    setdesable(false);
-    setTimeout(onClose(), 5000);
-  };
+ 
   return (
     <>
       <Button onClick={onOpen} bg={'#2C9BC8'}>
@@ -833,7 +836,7 @@ const NewIncome = () => {
           جديد
         </Heading>
       </Button>
-      <Modal isOpen={isOpen} onClose={closeme}>
+      <Modal isOpen={isOpen} onClose={onClose} size={'3xl'}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader> مصروف جديد </ModalHeader>

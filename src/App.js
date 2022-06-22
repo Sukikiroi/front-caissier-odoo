@@ -23,11 +23,14 @@ import { Provider } from 'react-redux';
 
 import { PDFViewer } from '@react-pdf/renderer';
 import Settings from './settings/Settings';
-
+import { RtlProvider } from "./rtl-provider"
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider  >
+       <RtlProvider>
+
+     
       <Provider store={store}>
         <Routes>
           <Route path="/income" element={<Income />} />
@@ -57,6 +60,7 @@ function App() {
           />
         </Routes>
       </Provider>
+      </RtlProvider>
     </ChakraProvider>
   );
 }
