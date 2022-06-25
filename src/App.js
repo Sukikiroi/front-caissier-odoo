@@ -17,18 +17,18 @@ import '@fontsource/raleway/400.css';
 import '@fontsource/open-sans/700.css';
 import '@fontsource/changa/700.css';
 
-import theme from './theme';
+ 
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
 
 import { PDFViewer } from '@react-pdf/renderer';
 import Settings from './settings/Settings';
-import { RtlProvider } from "./rtl-provider"
+ 
 
 function App() {
   return (
     <ChakraProvider  >
-       <RtlProvider>
+     
 
      
       <Provider store={store}>
@@ -60,7 +60,7 @@ function App() {
           />
         </Routes>
       </Provider>
-      </RtlProvider>
+     
     </ChakraProvider>
   );
 }

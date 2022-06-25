@@ -20,18 +20,21 @@ import {
     TableCaption,
     TableContainer,
   } from '@chakra-ui/react'
-
+  import "./styles.css";
   import Pdf from "react-to-pdf";
-import { VisuallyHidden, VisuallyHiddenInput } from '@chakra-ui/react'
-
+ 
 
 
 
 const Printingmodal = ({data}) => {
     const ref = React.createRef();
     const { isOpen, onOpen, onClose } = useDisclosure()
+   
+
   return (
-    <>
+    <div className="App">
+
+   
       <Button onClick={onOpen} bg='blue.300'>طباعة </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size={"4xl"}>
@@ -42,9 +45,11 @@ const Printingmodal = ({data}) => {
           <ModalBody>
        
  
-<Box w={700} h={700} ref={ref}>
- المدخل
-</Box>
+          <div ref={ref}>
+       الباب
+        <br></br>
+        <h2>Start editing to see some magic happen!</h2>
+      </div>
  
           </ModalBody>
 
@@ -59,7 +64,7 @@ const Printingmodal = ({data}) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+      </div>
   )
 }
 
