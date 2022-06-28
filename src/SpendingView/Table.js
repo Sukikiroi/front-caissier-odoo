@@ -48,7 +48,7 @@ const Spendingtable = ({ data }) => {
                   <Tr key={key}>
                     <Td>{spend.time}</Td>
                     <Td>{spend.create_date}</Td>
-                    <Td>{spend.sold}</Td>
+                    <Td>{spend.sold}  دج</Td>
                     <Td>{spend.door}</Td>
                     <Td>{spend.section}</Td>
 

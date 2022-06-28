@@ -89,11 +89,11 @@ const Income = () => {
           <Box w={'100%'} h={50} color={'#2C9BC8'} pr={30}>
             <Center w={'100%'} h={50}>
               <Button
-                leftIcon={<FaHome />}
+                rightIcon={<FaHome />}
                 colorScheme="#2C9BC8"
                 variant="outline"
               >
-                Home
+                قائمة
               </Button>
 
               <Spacer />

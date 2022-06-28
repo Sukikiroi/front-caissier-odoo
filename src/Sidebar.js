@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Hamburger from "hamburger-react";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem,Button } from "@chakra-ui/react";
 import { Center, Square, Circle } from "@chakra-ui/react";
 import { Link } from 'react-router-dom';
 import { Box } from '@chakra-ui/react'
@@ -46,7 +46,7 @@ const Sidebar = () => {
             <Hamburger
               borderTopRadius="6"
               bg="white"
-              color="black"
+              color="#2C9BC8"
               toggled={collapse}
               toggle={setcollapse}
             />
@@ -57,8 +57,12 @@ const Sidebar = () => {
               <Center bg="white" color="#2C9BC8" fontSize="lg">
                 {localStorage.getItem('openning') == '1' ? (
                   <Link onClick={() => setcollapse(!collapse)} to={'/income'}>
-                    {' '}
+                    
+                    
+                    <Button onClick={() => setcollapse(!collapse)}variant='outline'  w="100%"  color="#2C9BC8" >
                     المداخيل
+
+  </Button>
                   </Link>
                 ) : (
                   "المداخيل"
@@ -74,7 +78,11 @@ const Sidebar = () => {
                 {localStorage.getItem('openning') == '1' ? (
                   <Link onClick={() => setcollapse(!collapse)} to={'/spending'}>
                   {' '}
+                  
+                  <Button onClick={() => setcollapse(!collapse)} variant='outline'  w="100%"  color="#2C9BC8">
                   المصاريف
+
+  </Button>
                 </Link>
                 ) : (
                   "المصاريف"
@@ -84,17 +92,26 @@ const Sidebar = () => {
             </GridItem>
             <GridItem w="100%" h="50">
               <Center bg="white" color="#2C9BC8" fontSize="lg">
-                <Link onClick={() => setcollapse(!collapse)} to={'/openning'}>
-                  {' '}
-                  الغلق
-                </Link>
+              <Link   to={'/spending'}>
+              <Button onClick={() => setcollapse(!collapse)} variant='outline'  w="100%"  color="#2C9BC8">
+                الغلق
+
+  </Button>
+              </Link>
+
+              
               </Center>
             </GridItem>
             <GridItem w="100%" h="50">
               <Center bg="white" color="#2C9BC8" fontSize="lg">
                 <Link onClick={() => setcollapse(!collapse)} to={'/income'}>
                   {' '}
+                  
+
+                  <Button onClick={() => setcollapse(!collapse)} w="100%" variant='outline'    color="#2C9BC8">
                   المقارنة
+
+  </Button>
                 </Link>
               </Center>
             </GridItem>
@@ -102,7 +119,13 @@ const Sidebar = () => {
               <Center bg="white" color="#2C9BC8" fontSize="lg">
                 <Link onClick={() => setcollapse(!collapse)} to={'/settings'}>
                   {' '}
+
+
+                  <Button onClick={() => setcollapse(!collapse)} variant='outline'  w="100%"  color="#2C9BC8"     >
                   الاعدادات
+
+
+  </Button>
                 </Link>
               </Center>
             </GridItem>
@@ -110,7 +133,14 @@ const Sidebar = () => {
               <Center bg="white" color="#2C9BC8" fontSize="lg">
                 <Link onClick={() => setcollapse(!collapse)} to={'/login'}>
                  
+
+
+                  <Button onClick={() => setcollapse(!collapse)}  variant='outline'  w="100%"  color="#2C9BC8">
                   تسجيل خروج
+
+
+
+  </Button>
                 </Link>
               </Center>
             </GridItem>
@@ -123,6 +153,7 @@ const Sidebar = () => {
             backgroundColor: ' ',
             height: '100%',
             marginTop: '30px',
+            marginRight:"60px",
           }}
         >
           <div
@@ -137,7 +168,7 @@ const Sidebar = () => {
               boxShadow: ' 0px 10px 15px -3px rgba(0,0,0,0.1)',
             }}
           >
-            <Box bg="#072F60" color="white">
+            <Box bg="#2C9BC8" color="white" shadow="md" rounded="md">
               <Hamburger toggled={collapse} toggle={setcollapse} />
             </Box>
           </div>

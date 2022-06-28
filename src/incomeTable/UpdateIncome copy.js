@@ -23,7 +23,7 @@ import axios from "axios"
 import { Label } from '@mui/icons-material';
 
 
-const UpdateIncome = ({incomedata}) => {
+const UpdateIncome = ({Spendid}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 const [data, setdata] = useState()
 const [door, setdoor] = useState("")
@@ -32,11 +32,25 @@ const [section, setsection] = useState("")
 const [concerned, setconcerned] = useState("")
 const [taxpayer, settaxpayer] = useState("")
 const [sold, setsold] = useState("")
-  
-console.log(incomedata)
+  const getdata=()=>{
+    axios.post(`http://localhost:3004/spending/id`,{id:Spendid})
+    .then(res => {
+      setdata(res.data[0])
+      setdoor(res.data[0].door)
+      settaxpayer(res.data[0].taxpayer)
+      setconcerned(res.data[0].concerned)
+      setsection(res.data[0].section)
+      setentrance(res.data[0].entrance)
+      setsold(res.data[0].sold)
+     
+    })
+    onOpen()
+    console.log(data)
+  }
+
   return (
     <>
-      <Button onClick={onOpen} bg={'white'}>
+      <Button onClick={getdata} bg={'white'}>
         <EditIcon color={'green.400'} w={19} h={19} />
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} size={'3xl'}>

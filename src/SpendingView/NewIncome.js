@@ -814,10 +814,10 @@ const NewIncome = () => {
     });
 
     toast({
-      title: 'Account created.',
-      description: "We've created your account for you.",
+      title: ' مصروف جديد',
+      description: " تمت بنجاح",
       status: 'success',
-      duration: 9000,
+      duration: 2000,
       isClosable: true,
     });
    
@@ -853,9 +853,10 @@ const NewIncome = () => {
               <br></br>
               <br></br>
               <VStack>
-                <HStack>
+                <HStack w='100%'>
+                  <Box  w={'50%'}  >
                   <Select
-                    w={'50%'}
+                    w={'100%'}
                     placeholder=" الباب"
                     onChange={e => handledoors(e.target.value)}
                   >
@@ -863,6 +864,8 @@ const NewIncome = () => {
                       return <option value={door.id}>{door.name}</option>;
                     })}
                   </Select>
+                  </Box>
+                 
 
                   <Select
                     w={'50%'}
@@ -883,8 +886,8 @@ const NewIncome = () => {
                     return <option value={item.id}>{item.name}</option>;
                   })}
                 </Select>
-                <Flex>
-                  <Spacer />
+                <Flex w="100%" justifyContent={"space-between"}>
+                 
 
                   <NumberInput>
                     <NumberInputField
@@ -903,13 +906,13 @@ const NewIncome = () => {
                     _placeholder={{ opacity: 1, color: 'black' }}
                   />
                 </Flex>
-                <Flex>
+                <Flex w="100%" justifyContent={"space-between"}>
                   <Input
                     onChange={e => settaxpayer(e.target.value)}
                     placeholder="                المكلف"
                     _placeholder={{ opacity: 1, color: 'black' }}
                   />
-                  <Spacer />
+                
                   <Input
                     value={JSON.parse(localStorage.getItem('log')).name}
                     placeholder="                اسم أمين الصندوق"
@@ -920,6 +923,7 @@ const NewIncome = () => {
                 <Box w={'100%'} bg={''} h={'30'}>
                   <Textarea
                     placeholder=" ملاحظة"
+                  
                     onChange={e => setdescription(e.target.value)}
                   />
                 </Box>
