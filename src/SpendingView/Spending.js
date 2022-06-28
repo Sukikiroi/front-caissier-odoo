@@ -3,7 +3,6 @@ import {
   ChakraProvider,
   Box,
   Text,
-  Link,
   VStack,
   Code,
   Grid,
@@ -27,7 +26,7 @@ import {
   WrapItem,
 } from '@chakra-ui/react';
 import { Flex, Spacer } from '@chakra-ui/react';
-
+import { Link } from 'react-router-dom';
 import { Button, ButtonGroup } from '@chakra-ui/react';
 
 import IncomeFilter from './IncomeFilter';
@@ -88,6 +87,8 @@ const Income = () => {
         <VStack>
           <Box w={'100%'} h={50} color={'#2C9BC8'} pr={30}>
             <Center w={'100%'} h={50}>
+              <Link to="/home">
+            
               <Button
                 rightIcon={<FaHome />}
                 colorScheme="#2C9BC8"
@@ -95,6 +96,7 @@ const Income = () => {
               >
                 قائمة
               </Button>
+              </Link>
 
               <Spacer />
               <Heading>المصاريف</Heading>

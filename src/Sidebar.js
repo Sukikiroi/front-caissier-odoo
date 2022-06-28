@@ -20,6 +20,12 @@ import {
 const Sidebar = () => {
   const [collapse, setcollapse] = useState(false);
 
+
+const logout=()=>{
+  //localStorage.setItem('openning',0)
+  setcollapse(!collapse)
+}
+
   return (
     <>
       {collapse ? (
@@ -65,8 +71,10 @@ const Sidebar = () => {
   </Button>
                   </Link>
                 ) : (
-                  "المداخيل"
+                  <Button onClick={() => setcollapse(!collapse)}variant='outline'    color="#2C9BC8" >
+                  المداخيل
 
+</Button>
                 )} 
               </Center>
             </GridItem>
@@ -85,14 +93,16 @@ const Sidebar = () => {
   </Button>
                 </Link>
                 ) : (
-                  "المصاريف"
+                  <Button onClick={() => setcollapse(!collapse)} variant='outline'     color="#2C9BC8">
+                  المصاريف
 
+  </Button>
                 )} 
               </Center>
             </GridItem>
             <GridItem w="100%" h="50">
               <Center bg="white" color="#2C9BC8" fontSize="lg">
-              <Link   to={'/spending'}>
+              <Link   to={'/openning'}>
               <Button onClick={() => setcollapse(!collapse)} variant='outline'  w="100%"  color="#2C9BC8">
                 الغلق
 
@@ -131,11 +141,11 @@ const Sidebar = () => {
             </GridItem>
             <GridItem w="100%" h="50">
               <Center bg="white" color="#2C9BC8" fontSize="lg">
-                <Link onClick={() => setcollapse(!collapse)} to={'/login'}>
+                <Link  to={'/login'}>
                  
 
 
-                  <Button onClick={() => setcollapse(!collapse)}  variant='outline'  w="100%"  color="#2C9BC8">
+                  <Button onClick={logout}  variant='outline'  w="100%"  color="#2C9BC8">
                   تسجيل خروج
 
 
