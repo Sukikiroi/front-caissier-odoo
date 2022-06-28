@@ -20,6 +20,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
 import { HiOutlinePrinter } from 'react-icons/hi';
 import Printmodal from '../print/Printmodal';
+import InfoIcon from '@mui/icons-material/Info';
 const IncomeTable = ({ data }) => {
   return (
     <Container maxW="1200px" bg="black.600" color="black">
@@ -59,7 +60,7 @@ const IncomeTable = ({ data }) => {
                       <HStack>
                         <DeleteIncome Incomeid={income.id} />
                         <UpdateIncome Incomeid={income.id} />
-                        
+                        <InfoIcon style={{color:"#2C9BC8"}}/>
                       </HStack>
                     </Td>
                   </Tr>

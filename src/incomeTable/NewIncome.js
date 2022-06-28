@@ -21,10 +21,10 @@ import IncomePaper from './IncomePaper';
 import IncomeCoin from './IncomeCoin';
 import { useToast } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import SelectSearch from 'react-select'
 import axios from 'axios';
 import { updateData } from '../redux/slices';
-
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 const NewIncome = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -34,16 +34,20 @@ const NewIncome = () => {
   const [desable, setdesable] = useState(false);
   const [balance, setbalance] = useState(0);
   const [caisseuser, setcaisseuser] = useState('');
-  const paperone = useSelector(state => state.settings.paperone);
-  const papertwo = useSelector(state => state.settings.papertwo);
-  const papertree = useSelector(state => state.settings.papertree);
-  const coinone = useSelector(state => state.settings.coinone);
-  const cointwo = useSelector(state => state.settings.cointwo);
-  const cointree = useSelector(state => state.settings.cointree);
-  const coinfour = useSelector(state => state.settings.coinfour);
-  const coinfive = useSelector(state => state.settings.coinfive);
-  const coinsix = useSelector(state => state.settings.coinsix);
+ 
+const [paperone, setpaperone] = useState(0)
+const [papertwo, setpapertwo] = useState(0)
+const [papertree, setpapertree] = useState(0)
+const [paperfour, setpaperfour] = useState(0)
+const [coinone, setcoinone] = useState(0)
+const [cointwo, setcointwo] = useState(0)
+const [cointree, setcointree] = useState(0)
+const [coinfour, setcoinfour] = useState(0)
+const [coinfive, setcoinfive] = useState(0)
+ 
 
+ var sold=0;
+ sold= paperone*200+papertwo*500+papertree*1000+paperfour*2000+coinone*10+cointwo*20+cointree*50+coinfour*100+coinfive*200
   const newIncome = {
     customer: customernumber,
     operation: operationnumber,
@@ -57,7 +61,7 @@ const NewIncome = () => {
     cointree: cointree,
     coinfour: coinfour,
     coinfive: coinfive,
-    coinsix: coinsix,
+     
   };
 
   const sendIncome = () => {
@@ -65,9 +69,11 @@ const NewIncome = () => {
     axios
       .post(`http://localhost:3004/income/newincome`, newIncome)
       .then(res => {
-        console.log(res);
-        console.log(res.data);
-       
+        setdesable(true);
+        axios.get(`http://localhost:3004/income`).then(res => {
+          dispatch(updateData(res.data));
+        });
+        onClose()
       });
 
     toast({
@@ -78,8 +84,13 @@ const NewIncome = () => {
       isClosable: true,
     });
     setdesable(true);
-  };
 
+    setTimeout(() => {
+      setdesable(false);
+    }, "1000")
+  };
+   
+  
   const closeme = () => {
     axios.get(`http://localhost:3004/income`).then(res => {
       dispatch(updateData(res.data.reverse()));
@@ -87,56 +98,69 @@ const NewIncome = () => {
     setdesable(false);
     onClose();
   };
+
+
+const options = [
+  { value: 'chocolate', label: 'محمد' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }
+]
   return (
     <>
-      <Button onClick={onOpen} bg={'#2C9BC8'}align='right'>
-        <Box align='left' width={'100%'}>
-        جديد
+      <Button onClick={onOpen} bg={'#2C9BC8'} align="right">
+        <Box align="left" width={'100%'}>
+          جديد
         </Box>
-                                            
       </Button>
-      <Modal isOpen={isOpen} onClose={closeme}>
+      <Modal isOpen={isOpen} onClose={closeme} size="4xl" height={700}>
         <ModalOverlay />
         <ModalContent>
           <br></br>
-          <ModalHeader align='left'> 
-          <Box align='right' width={'100%'}>
-        جديد
-        </Box> </ModalHeader>
+          <ModalHeader align="left">
+            <Box align="right" width={'100%'}>
+              جديد
+            </Box>{' '}
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Box w={400} h={300} bg={'white'}>
+            <Box w={'100%'} h={300} bg={'white'}>
               <VStack>
-                <HStack w={400}>
-                  <Select
-                    w={'50%'}
-                    placeholder=" الزبون"
-                    onChange={e => setcustomernumber(e.target.value)}
-                  >
-                    <option value="option1">المخالصة</option>
-                    <option value="option2">قسط</option>
-                    <option value="option3">أخرى</option>
-                  </Select>
+                <HStack w={'100%'}>
+                 
+                  {operationnumber!=="3" ? (
+                    <Box w={'50%'}>
+                      <SelectSearch
+                        isRtl={true}
+                        placeholder="الزبون"
+                        styles={{ width: '100%' }}
+                        options={options}
+                      />
+                    </Box>
+                  ) : (
+                    ''
+                  )}
 
                   <Select
                     w={'50%'}
                     placeholder=" العملية"
                     onChange={e => setoperationnumber(e.target.value)}
                   >
-                     <option value="option1">المخالصة</option>
-                    <option value="option2">قسط</option>
-                    <option value="option3">أخرى</option>
+                    <option value="1">المخالصة</option>
+                    <option value="2">قسط</option>
+                    <option value="3">أخرى</option>
                   </Select>
                 </HStack>
-                <Flex w={400}>
+                <Flex w={'100%'}>
                   <Spacer />
                   <Input
                     onChange={e => setbalance(e.target.value)}
-                    placeholder="                المبلغ"
+                    placeholder=" 
+                                   المبلغ"
+                                   value={sold}
                     _placeholder={{ opacity: 1, color: 'black' }}
                   />
                 </Flex>
-                <Flex w={400}>
+                <Flex w={'100%'}>
                   <Spacer />
                   <Input
                     onChange={e => setcaisseuser(e.target.value)}
@@ -144,19 +168,43 @@ const NewIncome = () => {
                     _placeholder={{ opacity: 1, color: 'black' }}
                   />
                 </Flex>
-
-                <Flex w={'100%'}>
-                  <Spacer />
-                  <IncomePaper />
-                </Flex>
-                <Box w={'100%'} bg={'white'} h={'30'}></Box>
-
-                <Flex w={'100%'}>
-                  <Spacer />
-                  <IncomeCoin />
-                </Flex>
-                <Box w={'100%'} bg={'white'} h={'30'}></Box>
               </VStack>
+
+              <Box w="100%" h={150} bg="white" mt={10}>
+              <Tabs direction="rtl" >
+  <TabList>
+    <Tab>ورق </Tab>
+    <Tab>معدن </Tab>
+   </TabList>
+
+  <TabPanels>
+    <TabPanel>
+     <Flex>
+     <Input placeholder='200 دج' onChange={e => setpaperone(e.target.value)}/>
+     <Input placeholder='500 دج 'onChange={e => setpapertwo(e.target.value)} />
+     <Input placeholder='1000 دج 'onChange={e => setpapertree(e.target.value)} />
+     <Input placeholder='2000 دج 'onChange={e => setpaperfour(e.target.value)} />
+        </Flex>
+    </TabPanel>
+    <TabPanel>
+      <Flex>
+      <Input placeholder=' 10 دج'onChange={e => setcoinone(e.target.value)} />
+    <Input placeholder=' 20 دج'onChange={e => setcointwo(e.target.value)} />
+    <Input placeholder='50 دج ' onChange={e => setcointree(e.target.value)}/>
+    <Input placeholder=' 100 دج ' onChange={e => setcoinfour(e.target.value)}/>
+    <Input placeholder='200 دج'onChange={e => setcoinfive(e.target.value)} />
+
+        </Flex>
+   
+
+
+    </TabPanel>
+    
+  </TabPanels>
+</Tabs>
+
+ 
+              </Box>
             </Box>
           </ModalBody>
 

@@ -89,45 +89,35 @@ const Income = () => {
     <>
       <Box bg="white" h={'100%'} p={4} color="white">
         <VStack>
-          <Box w={'100%'} h={50} color={'#2C9BC8'} pr={30}>
+          <Flex w={'100%'} h={50}   color={'#2C9BC8'} pr={30} justifyContent={"flex-start"}>
             <Center w={'100%'} h={50}>
-              <Button
-                leftIcon={<FaHome />}
-                colorScheme="#2C9BC8"
-                variant="outline"
-              >
-                Home
-              </Button>
+            <Heading>المداخيل</Heading>
 
-              <Spacer />
-              <Heading>المداخيل</Heading>
+             
+
+            
             </Center>
-          </Box>
+          </Flex>
 
           <Box w={'100%'} h={500}>
             <VStack>
-              <Box w={'100%'} mt={30}>
+              <Flex w={'100%'} mt={30}   justifyContent={"flex-start"}>
                 <HStack>
                
                   <Spacer />
-                  <Button onClick={reloaddata}
-                    leftIcon={<BiRefresh/>}
-                   bg={"#2C9BC8"}
-                    variant="solid"
-                  > طباعة
-                  </Button>
+                
 
-                  <Printmodal/>
+                 
                   <IncomeFilter />
 
                   <NewIncome />
                 </HStack>
-              </Box>
+              </Flex>
               <Box bg={'white'} w={'100%'}>
                 {searchactivate ? (
                   <IncomeTablefilter data={resultData} />
                 ) : (
-                  <IncomeTable data={dataincome} />
+                  <IncomeTable data={resultData} />
                 )}
               </Box>
             </VStack>

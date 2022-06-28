@@ -21,12 +21,9 @@ ReactDOM.render(
     
   
 
-    <div style={{ width: "100%", height:'100%',backgroundColor: "", display: "flex" }}>
-      <div style={{ flexGrow: "1", backgroundColor: "white" }}>  
+   
       <App />
-      </div>
- <Sidebar/>
-    </div>
+   
     
     </BrowserRouter>
 
