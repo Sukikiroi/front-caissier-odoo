@@ -10,8 +10,7 @@ const Home = () => {
   return (
     <Center w={'100%'} height={'900'} bg={'white'}>
       <Flex w={500} h={500} justifyContent="space-between" alignItems="center">
-        <Link to={"/openning"} >
-       
+        <Link to={"/openning"}  target="_self" >     
         <Center
           w={200}
           h={200}
