@@ -44,7 +44,7 @@ const UpdateIncome = ({ incomedata }) => {
   const [taxpayer, settaxpayer] = useState('');
   const [sold, setsold] = useState('');
 
-  console.log(incomedata);
+ 
   return (
     <>
       <Button onClick={onOpen} bg={'white'}>

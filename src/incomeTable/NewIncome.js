@@ -25,6 +25,9 @@ import SelectSearch from 'react-select'
 import axios from 'axios';
 import { updateData } from '../redux/slices';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+
+
+import supabase from '../supabase.config';
 const NewIncome = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -44,7 +47,7 @@ const [cointwo, setcointwo] = useState(0)
 const [cointree, setcointree] = useState(0)
 const [coinfour, setcoinfour] = useState(0)
 const [coinfive, setcoinfive] = useState(0)
- 
+ const [customers, setcustomers] = useState([])
 
  var sold=0;
  sold= paperone*200+papertwo*500+papertree*1000+paperfour*2000+coinone*10+cointwo*20+cointree*50+coinfour*100+coinfive*200
@@ -98,6 +101,15 @@ const [coinfive, setcoinfive] = useState(0)
     setdesable(false);
     onClose();
   };
+const getcustomer=async()=>{
+  const { data, error } = await supabase
+  .from('customers')
+  .select()
+  console.log(data)
+
+ 
+}
+getcustomer()
 
 
 const options = [

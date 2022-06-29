@@ -124,12 +124,24 @@ function App() {
           <Route path="/settings" element={
           
           
-          
-          
-          
-          
-          
+          <div
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: '',
+            display: 'flex',
+          }}
+        >
+          <div style={{ flexGrow: '1', backgroundColor: 'white' }}>
           <Settings />
+          </div>
+          <Sidebar />
+        </div>
+          
+          
+          
+          
+       
           
           
           
