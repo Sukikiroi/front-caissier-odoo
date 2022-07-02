@@ -15,16 +15,21 @@ import {
   Flex,
   TagLabel,
   Text,
+  useToast
 } from '@chakra-ui/react';
 
 import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
 
 import axios from "axios"
 import { Label } from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
+import { updateData } from '../redux/slices';
 
 
 const UpdateIncome = ({Spendid}) => {
+  const dispatch=useDispatch()
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 const [data, setdata] = useState()
 const [door, setdoor] = useState("")
 const [entrance, setentrance] = useState("")
@@ -45,9 +50,43 @@ const [sold, setsold] = useState("")
      
     })
     onOpen()
-    console.log(data)
+   
   }
+ 
 
+const updatespending=()=>{
+  console.log(Spendid) 
+  axios.post('http://localhost:3004/spending/update', {
+    id: Spendid,
+    door:door,
+    entrance:entrance,
+    section:section,
+    concerned:concerned,
+    taxpayer:taxpayer,
+    sold:sold,
+  })
+  .then(function (response) {
+    console.log(response);
+    axios.get(`http://localhost:3004/spending`).then(res => {
+      dispatch(updateData(res.data));
+    });
+    onClose()
+    toast({
+      title: '  تحديث',
+      description: " تمت  تحديث بنجاح",
+      status: 'success',
+      duration: 2000,
+      isClosable: true,
+    });
+   
+
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+
+}
   return (
     <>
       <Button onClick={getdata} bg={'white'}>
@@ -102,7 +141,7 @@ const [sold, setsold] = useState("")
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               الغاء
             </Button>
-            <Button variant='outline'> تغيير</Button>
+            <Button variant='outline' onClick={updatespending}> تغيير</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

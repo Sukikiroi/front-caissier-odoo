@@ -60,7 +60,7 @@ const IncomeTable = ({ data }) => {
                       <HStack>
                         <DeleteIncome Incomeid={income.id} />
                         <UpdateIncome incomedata={income} />
-                        <InfoIcon style={{color:"#2C9BC8"}}/>
+                       
                       </HStack>
                     </Td>
                   </Tr>

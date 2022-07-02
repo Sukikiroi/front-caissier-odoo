@@ -66,7 +66,7 @@ const UpdateIncome = ({ incomedata }) => {
                   variant="filled"
                   bg="blue.100"
                   placeholder="Filled"
-                  value={concerned}
+                  value={incomedata.balance}
                   onChange={e => setconcerned(e.target.value)}
                 />
               </Flex>
@@ -79,7 +79,7 @@ const UpdateIncome = ({ incomedata }) => {
                   variant="filled"
                   bg="blue.100"
                   placeholder="Filled"
-                  value={door}
+                  value={incomedata.operation_code}
                   onChange={e => setdoor(e.target.value)}
                 />
               </Flex>
@@ -92,7 +92,7 @@ const UpdateIncome = ({ incomedata }) => {
                   variant="filled"
                   bg="blue.100"
                   placeholder="Filled"
-                  value={entrance}
+                  value={incomedata.client_code}
                   onChange={e => setentrance(e.target.value)}
                 />
               </Flex>
@@ -107,7 +107,7 @@ const UpdateIncome = ({ incomedata }) => {
                     <Box w="30%" h="100%" display="block">
                       <Flex justifyContent="space-between" mb={5}>
                         <Tag>200 </Tag>
-                        X2
+                        X{incomedata.first_qty}
                       </Flex>
 
                       <Flex justifyContent="space-between" mb={5}>

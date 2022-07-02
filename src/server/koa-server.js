@@ -344,9 +344,11 @@ app.post('/spending/update', async (req, res) => {
 
   try {
     const updated = await odoo.update('caissier.spending', req.body.id, {
-      street: '334 Living Astro Blvd.',
+      door:  req.body.door,concerned:req.body.concerned,taxpayer:req.body.concerned,sold:req.body.sold,entrance:req.body.entrance,section:req.body.section
     });
+
     res.send(JSON.stringify(updated, null, 2));
+    console.log( req.body)
   } catch (exception_var) {
     console.log(exception_var);
     res.send(400);
