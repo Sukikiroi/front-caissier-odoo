@@ -13,17 +13,20 @@ import {
 } from '@chakra-ui/react';
 import Fuse from 'fuse.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateData, actiavtesearch, deactiavtesearch } from '../redux/slices';
+import { updatespendingData, actiavtesearch, deactiavtesearch, updatespedningFiltedData } from '../redux/slices';
 import axios from 'axios';
 
 const IncomeFilter = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const incomedata = useSelector(state => state.settings.resultData);
+  const spendingrealData = useSelector(
+    state => state.settings.spendingrealData
+  );
   const dispatch = useDispatch();
   const [datefilter, setdatefilter] = useState('');
   const [customernumber, setcustomernumber] = useState(0);
   const [operationnumber, setoperationnumber] = useState('');
+  const [sold, setsold] = useState(0)
   const [time, settime] = useState('');
   const [door, setdoor] = useState('');
   const [entrance, setentrance] = useState('');
@@ -31,37 +34,36 @@ const IncomeFilter = () => {
 
   const dofilter = () => {
     // 3. Now search!
-    if (datefilter !== '') {
-      const fuse = new Fuse(incomedata, {
-        keys: ['date'],
-        useExtendedSearch: true,
-      });
-      dispatch(updateData(fuse.search('=' + datefilter)));
-    } else if (customernumber !== 0) {
-      const fuse = new Fuse(incomedata, {
-        keys: ['client_code'],
-        useExtendedSearch: true,
-      });
+    const fuse = new Fuse(spendingrealData, {
+      keys: ['door', 'date','entrance','section','sold'],
+      useExtendedSearch: true,
+    });
 
-      dispatch(updateData(fuse.search('=' + customernumber)));
-    }
-    dispatch(actiavtesearch());
+    console.log(entrance);
+    //2022-06-02
+    let resultat = fuse.search({
+      $or: [{ sold:"<"+sold },{ door:"="+door }, { date:"="+datefilter }, { entrance:entrance }, { section:section }]
+    });
+
+    console.log(resultat);
+   dispatch(updatespedningFiltedData(resultat))
+  dispatch(actiavtesearch())
   };
 
   const clearfilter = () => {
-    axios.get(`http://localhost:3004/income`).then(res => {
-      dispatch(updateData(res.data));
+    axios.get(`http://localhost:3004/spending`).then(res => {
+      dispatch(updatespendingData(res.data));
       dispatch(deactiavtesearch());
     });
   };
   return (
     <>
       <Button ref={btnRef} onClick={onOpen} bg={'#2C9BC8'}>
-        فيلتر
+        بحت
       </Button>
       <Drawer
         isOpen={isOpen}
-        placement='right'
+        placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
       >
@@ -98,9 +100,9 @@ const IncomeFilter = () => {
               onChange={e => setentrance(e.target.value)}
             />
             <Input
-              placeholder="Type here..."
+              placeholder="المبلغ"
               mb={30}
-              onChange={e => setoperationnumber(e.target.value)}
+              onChange={e => setsold(e.target.value)}
             />
             <Input placeholder="Type here..." mb={30} />
           </DrawerBody>

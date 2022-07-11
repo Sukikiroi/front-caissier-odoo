@@ -21,6 +21,12 @@ const initialState = {
   time: '',
 
   resultData: [],
+  incomeFilteredData:[],
+  spendingFilteredData:[],
+  spendingrealData:[],
+
+  incomerealData:[],
+
   searchactivate: false,
   company:localStorage.getItem('company')? localStorage.getItem('company')[0].companyname:""
 };
@@ -45,6 +51,25 @@ export const settingsSlice = createSlice({
 
     updateData: (state, action) => {
       state.resultData = action.payload;
+     
+    },
+
+
+    updatespendingData:(state, action) => {
+      state.spendingrealData = action.payload;
+     
+    },
+    updatespedningFiltedData:(state, action) => {
+      state.spendingFilteredData = action.payload;
+     
+    },
+    updateincomeFiltedData:(state, action) => {
+      state.incomeFilteredData = action.payload;
+     
+    },
+    
+    updateincomeData:(state, action) => {
+      state.incomerealData = action.payload;
      
     },
     actiavtesearch: state => {
@@ -79,7 +104,10 @@ export const {
   deactiavtesearch,
   setemail,
   setpassword,
-
+  updatespendingData,
+  updatespedningFiltedData,
+  updateincomeData,
+  updateincomeFiltedData,
 } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

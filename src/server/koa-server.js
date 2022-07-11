@@ -11,7 +11,7 @@ const Odoo = require('odoo-await');
 var odoo = new Odoo({
   baseUrl: 'http://localhost',
   port: 8069, // see comments below regarding port option
-  db: 'bourhanbackup',
+  db: 'newdb',
   //username: 'souilhmoh@gm.com',
   username: 'kaddourabdellaziz@gmail.com',
   //username: 'tecmint',
@@ -31,7 +31,7 @@ app.post('/login', async (req, res) => {
     var odoo = new Odoo({
       baseUrl: 'http://localhost',
       port: 8069, // see comments below regarding port option
-      db: 'bourhanbackup',
+      db: 'newdb',
       //username: 'souilhmoh@gm.com',
       username: req.body.username,
       //username: 'tecmint',
@@ -51,12 +51,36 @@ app.post('/login', async (req, res) => {
   }
 });
 
+
+app.post('/company', async (req, res) => {
+  var status = 0;
+  try {
+    var odoo = new Odoo({
+      baseUrl: 'http://localhost',
+      port: 8069, // see comments below regarding port option
+      db: 'newdb',
+      //username: 'souilhmoh@gm.com',
+      username: req.body.username,
+      //username: 'tecmint',
+      password: req.body.password,
+    });
+    await odoo.connect();
+    
+    var company = await odoo.searchRead(`res.company`,{"id":req.body.company_id});
+    console.log(company);
+    res.send(company);
+  } catch (exception_var) {
+    console.log(company);
+    res.send(company);
+  }
+});
+
 app.post('/income/id', async (req, res) => {
   console.log(req.body);
   var odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
-    db: 'bourhanbackup',
+    db: 'newdb',
     //username: 'souilhmoh@gm.com',
     username: 'kaddourabdellaziz@gmail.com',
     //username: 'tecmint',
@@ -79,7 +103,7 @@ app.post('/income', async (req, res) => {
   var odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
-    db: 'bourhanbackup',
+    db: 'newdb',
     //username: 'souilhmoh@gm.com',
     username: req.body.username,
     //username: 'tecmint',
@@ -87,7 +111,7 @@ app.post('/income', async (req, res) => {
   });
   console.log(req.body.username)
   await odoo.connect();
-  const records = await odoo.searchRead(`caissier.income`);
+  const records = await odoo.searchRead(`caissier.income`,{"company_id":req.body.company_id});
 
   res.end(JSON.stringify(records, null, 2));
 });
@@ -96,7 +120,7 @@ app.get('/income/today', async (req, res) => {
   var odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
-    db: 'bourhanbackup',
+    db: 'newdb',
     //username: 'souilhmoh@gm.com',
     username: 'kaddourabdellaziz@gmail.com',
     //username: 'tecmint',
@@ -125,7 +149,7 @@ app.post('/income/newincome', async (req, res) => {
   var odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
-    db: 'bourhanbackup',
+    db: 'newdb',
     //username: 'souilhmoh@gm.com',
     username: 'kaddourabdellaziz@gmail.com',
     //username: 'tecmint',
@@ -135,7 +159,7 @@ app.post('/income/newincome', async (req, res) => {
   const date = new Date();
 
   const todayDate =
-    date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+    date.getFullYear() + '-' + (Number(date.getMonth())+1) + '-' + date.getDate();
 
   console.log(todayDate);
   try {
@@ -153,8 +177,9 @@ app.post('/income/newincome', async (req, res) => {
       date: todayDate,
       operation_code: 2,
       client_code: 3,
+      company_id:req.body.company_id
     });
-    console.log(Incomeid);
+    
 
     res.send(JSON.stringify(req.body, null, 2));
   } catch (exception_var) {
@@ -171,7 +196,7 @@ app.post('/income/delete', async (req, res) => {
   var odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
-    db: 'bourhanbackup',
+    db: 'newdb',
     //username: 'souilhmoh@gm.com',
     username: 'kaddourabdellaziz@gmail.com',
     //username: 'tecmint',
@@ -197,7 +222,7 @@ app.post('/income/update', async (req, res) => {
   var odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
-    db: 'bourhanbackup',
+    db: 'newdb',
     //username: 'souilhmoh@gm.com',
     username: 'kaddourabdellaziz@gmail.com',
     //username: 'tecmint',
@@ -233,18 +258,17 @@ app.post('/income/update', async (req, res) => {
 
 
 
-app.get('/spending', async (req, res) => {
+app.post('/spending', async (req, res) => {
   var odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
-    db: 'bourhanbackup',
-    //username: 'souilhmoh@gm.com',
-    username: 'kaddourabdellaziz@gmail.com',
-    //username: 'tecmint',
-    password: 'rabeh',
+    db: 'newdb',
+    username: req.body.username,
+    password:req.body.password,
   });
+  console.log(req.body.company_id)
   await odoo.connect();
-  const records = await odoo.searchRead(`caissier.spending`);
+  const records = await odoo.searchRead(`caissier.spending`,{"company_id":req.body.company_id});
 
   res.end(JSON.stringify(records, null, 2));
 });
@@ -253,7 +277,7 @@ app.post('/spending/new', async (req, res) => {
   var odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
-    db: 'bourhanbackup',
+    db: 'newdb',
     //username: 'souilhmoh@gm.com',
     username: 'kaddourabdellaziz@gmail.com',
     //username: 'tecmint',
@@ -270,6 +294,7 @@ app.post('/spending/new', async (req, res) => {
     sold: req.body.sold,
     concerned: req.body.concerned,
     taxpayer: req.body.taxpayer,
+    company_id:1
   });
 
   res.end(JSON.stringify(new_spending, null, 2));
@@ -280,7 +305,7 @@ app.post('/spending/id', async (req, res) => {
   var odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
-    db: 'bourhanbackup',
+    db: 'newdb',
     //username: 'souilhmoh@gm.com',
     username: 'kaddourabdellaziz@gmail.com',
     //username: 'tecmint',
@@ -308,7 +333,7 @@ app.post('/spending/delete', async (req, res) => {
   var odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
-    db: 'bourhanbackup',
+    db: 'newdb',
     //username: 'souilhmoh@gm.com',
     username: 'kaddourabdellaziz@gmail.com',
     //username: 'tecmint',
@@ -334,7 +359,7 @@ app.post('/spending/update', async (req, res) => {
   var odoo = new Odoo({
     baseUrl: 'http://localhost',
     port: 8069, // see comments below regarding port option
-    db: 'bourhanbackup',
+    db: 'newdb',
     //username: 'souilhmoh@gm.com',
     username: 'kaddourabdellaziz@gmail.com',
     //username: 'tecmint',

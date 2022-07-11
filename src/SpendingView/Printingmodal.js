@@ -8,7 +8,7 @@ import {
     ModalBody,
     ModalCloseButton,Button,useDisclosure,Text, Box, Center,
   } from '@chakra-ui/react'
-
+import App from "../printLib/App"
   import {
     Table,
     Thead,
@@ -30,41 +30,38 @@ const Printingmodal = ({data}) => {
     const ref = React.createRef();
     const { isOpen, onOpen, onClose } = useDisclosure()
    
-
+const printme=()=>{
+  window.print()
+}
   return (
-    <div className="App">
-
+ 
+<>
    
       <Button onClick={onOpen} bg='blue.300'>طباعة </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} size={"4xl"}>
+      <Modal isOpen={isOpen} onClose={onClose} size={"5xl"}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
        
- 
-          <div ref={ref}>
-       الباب
-        <br></br>
-        <h2>Start editing to see some magic happen!</h2>
-      </div>
+       <App/>
+     
+
  
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose} color='white'>
+            <Button colorScheme='blue' mr={3} onClick={printme } color='white'>
               الغاء
             </Button>
-             
-            <Pdf targetRef={ref} filename="spending.pdf" align='right' lang='ar'>
-      {({ toPdf }) => <Button bg='green.400' color='white' onClick={toPdf}>أطبع</Button>}
-    </Pdf>
+            <Button bg='green.400' color='white'>أطبع</Button>
+
           </ModalFooter>
         </ModalContent>
       </Modal>
-      </div>
+      </>
   )
 }
 

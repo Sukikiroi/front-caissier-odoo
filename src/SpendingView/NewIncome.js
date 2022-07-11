@@ -22,9 +22,9 @@ import IncomePaper from './IncomePaper';
 import IncomeCoin from './IncomeCoin';
 import { useToast } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Textarea } from '@chakra-ui/react';
+import { Textarea ,Text} from '@chakra-ui/react';
 import axios from 'axios';
-import { updateData } from '../redux/slices';
+import { updateData, updatespendingData } from '../redux/slices';
 
 import {
   NumberInput,
@@ -33,6 +33,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from '@chakra-ui/react';
+import currencyFormatter from "currency-formatter"
 
 import { SiWhatsapp } from 'react-icons/si';
 const NewIncome = () => {
@@ -802,33 +803,32 @@ const NewIncome = () => {
   };
 
   const sendIncome = () => {
-   
     axios.post(`http://localhost:3004/spending/new`, newspending).then(res => {
-      console.log(res);
-      console.log(res.data);
+      
       setdesable(true);
-      axios.get(`http://localhost:3004/spending`).then(res => {
-        dispatch(updateData(res.data));
+      const username=JSON.parse(localStorage.getItem('log')).username
+      const password=JSON.parse(localStorage.getItem('log')).password
+      const company_id= JSON.parse(localStorage.getItem('company_id'))
+      const user={username:username,password:password,company_id:company_id}
+      axios.post(`http://localhost:3004/spending`,user).then(res => {
+        dispatch(updatespendingData(res.data));
       });
-      onClose()
+      onClose();
     });
 
     toast({
       title: ' مصروف جديد',
-      description: " تمت بنجاح",
+      description: ' تمت بنجاح',
       status: 'success',
       duration: 2000,
       isClosable: true,
     });
-   
 
     setTimeout(() => {
       setdesable(false);
-    }, "1000")
-    
+    }, '1000');
   };
 
- 
   return (
     <>
       <Button onClick={onOpen} bg={'#2C9BC8'}>
@@ -839,7 +839,7 @@ const NewIncome = () => {
       <Modal isOpen={isOpen} onClose={onClose} size={'3xl'}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader> مصروف جديد </ModalHeader>
+          <ModalHeader mr={30}> مصروف جديد </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Box h={450} bg={'white'}>
@@ -853,23 +853,22 @@ const NewIncome = () => {
               <br></br>
               <br></br>
               <VStack>
-                <HStack w='100%'>
-                  <Box  w={'50%'}  >
-                  <Select
-                    w={'100%'}
-                    placeholder=" الباب"
-                    onChange={e => handledoors(e.target.value)}
-                  >
-                    {doors.map((door, key) => {
-                      return <option value={door.id}>{door.name}</option>;
-                    })}
-                  </Select>
+                <HStack w="100%">
+                  <Box w={'50%'}>
+                    <Select
+                      w={'100%'}
+                      placeholder=" الفسم"
+                      onChange={e => handledoors(e.target.value)}
+                    >
+                      {doors.map((door, key) => {
+                        return <option value={door.id}>{door.name}</option>;
+                      })}
+                    </Select>
                   </Box>
-                 
 
                   <Select
                     w={'50%'}
-                    placeholder="القسم "
+                    placeholder="المدخل "
                     onChange={e => handlesections(e.target.value)}
                   >
                     {section.map((item, key) => {
@@ -879,20 +878,35 @@ const NewIncome = () => {
                 </HStack>
                 <Select
                   w={'100%'}
-                  placeholder=" المدخل"
+                  placeholder=" الباب"
                   onChange={e => handleentrances(e.target.value)}
                 >
                   {entrance.map((item, key) => {
                     return <option value={item.id}>{item.name}</option>;
                   })}
                 </Select>
-                <Flex w="100%" justifyContent={"space-between"}>
-                 
-
-                  <NumberInput>
+                <Flex w="100%" justifyContent={'space-between'} alignItems="center">
+                  <Box ml={30} w="30%">
+                    <Text>
+                    { currencyFormatter.format(sold, {
+                            symbol: 'دج',
+                            decimal: '.',
+                            thousand: ',',
+                            precision: 2,
+                            format: '%v %s', // %s is the symbol and %v is the value
+                          })}
+                    </Text>
+                
+                  </Box>
+               
+                  <NumberInput  >
                     <NumberInputField
-                      onChange={e => setsold(e.target.value)}
-                      placeholder="                الرصيد"
+                   
+                      pr={35}
+                      onChange={e =>
+                        setsold(e.target.value)
+                      }
+                      placeholder="                المبلغ"
                     />
                     <NumberInputStepper>
                       <NumberIncrementStepper />
@@ -900,19 +914,19 @@ const NewIncome = () => {
                     </NumberInputStepper>
                   </NumberInput>
 
-                  <Input
+                  <Input w="30%"
                     onChange={e => setconcerned(e.target.value)}
                     placeholder="                المعني"
                     _placeholder={{ opacity: 1, color: 'black' }}
                   />
                 </Flex>
-                <Flex w="100%" justifyContent={"space-between"}>
+                <Flex w="100%" justifyContent={'space-between'}>
                   <Input
                     onChange={e => settaxpayer(e.target.value)}
                     placeholder="                المكلف"
                     _placeholder={{ opacity: 1, color: 'black' }}
                   />
-                
+
                   <Input
                     value={JSON.parse(localStorage.getItem('log')).name}
                     placeholder="                اسم أمين الصندوق"
@@ -923,7 +937,6 @@ const NewIncome = () => {
                 <Box w={'100%'} bg={''} h={'30'}>
                   <Textarea
                     placeholder=" ملاحظة"
-                  
                     onChange={e => setdescription(e.target.value)}
                   />
                 </Box>

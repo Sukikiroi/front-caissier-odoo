@@ -21,24 +21,26 @@ import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
 import { HiOutlinePrinter } from 'react-icons/hi';
 import Printmodal from '../print/Printmodal';
 import InfoIcon from '@mui/icons-material/Info';
+import currencyFormatter from "currency-formatter"
 const IncomeTable = ({ data }) => {
   return (
-    <Container maxW="1200px" bg="black.600" color="black">
+    <Container maxW="800" bg="black.600" color="black">
       <TableContainer border={'4px solid #2C9BC8'} borderRadius={'5'}>
         <Table variant="simple">
           <PerfectScrollbar>
-            <Thead bg={'#2C9BC8'}>
+            <Thead bg={'#2C9BC8'} w="800">
               <Tr color={'white'}>
                 <Th color={'white'}>الساعة</Th>
                 <Th color={'white'}>التاريخ</Th>
                 <Th color={'white'}> المبلغ</Th>
                 <Th color={'white'}>رقم العملية</Th>
-                <Th color={'white'}>رقم العميل</Th>
-                <Th color={'white'}> صنف 2000</Th>
-                <Th color={'white'}> صنف 1000</Th>
-                <Th color={'white'}> صنف 500</Th>
-                <Th color={'white'}> صنف 200</Th>
-                <Th color={'white'}> أجراءات</Th>
+                <Th color={'white'} > رقم الزبون</Th>
+                <Th color={'white'} >الاجرأت</Th>
+                <Th color={'white'} > </Th>
+                <Th color={'white'} ></Th>
+                <Th color={'white'} ></Th>
+               
+              
               </Tr>
             </Thead>
             <Tbody>
@@ -47,20 +49,32 @@ const IncomeTable = ({ data }) => {
                   <Tr key={key}>
                     <Td>{income.time}</Td>
                     <Td>{income.date}</Td>
-                    <Td>{income.balance}</Td>
+                    <Td>
+                      {currencyFormatter.format(income.balance, {
+                        symbol: 'دج',
+                        decimal: '.',
+                        thousand: ',',
+                        precision: 2,
+                        format: '%v %s', // %s is the symbol and %v is the value
+                      })}
+                    </Td>
                     <Td>{income.operation_code}</Td>
                     <Td>{income.client_code}</Td>
 
-                    <Td>{income.first_qty}</Td>
+                    {/* <Td>{income.first_qty}</Td>
                     <Td>{income.seconde_qty}</Td>
                     <Td>{income.tree_qty}</Td>
-                    <Td>{income.four_qty}</Td>
+                    <Td>{income.four_qty}</Td> */}
 
                     <Td>
                       <HStack>
-                        <DeleteIncome Incomeid={income.id} />
+                        {localStorage.getItem('role') == 1 ? (
+                          <DeleteIncome Incomeid={income.id} />
+                        ) : (
+                          ''
+                        )}
+
                         <UpdateIncome incomedata={income} />
-                       
                       </HStack>
                     </Td>
                   </Tr>

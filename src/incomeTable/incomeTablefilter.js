@@ -25,25 +25,23 @@ import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
 
 const IncomeTablefilter = ({ data }) => {
   return (
-    <Container maxW="1350px" maxH={400} bg="black.600" color="black">
+    <Container maxW="900" maxH={400} bg="black.600" color="black">
         
       <TableContainer   maxH={600} border={'4px solid #2C9BC8'} borderRadius={'5'}>
         <Table variant="simple">
         <PerfectScrollbar>
-          <Thead bg={'#2C9BC8'}>
+          <Thead bg={'#2C9BC8'} >
             <Tr color={'white'}>
               <Th color={'white'}>الساعة</Th>
               <Th color={'white'}>التاريخ</Th>
               <Th color={'white'}>الرصيد المدخول</Th>
               <Th color={'white'}>رقم العملية</Th>
               <Th color={'white'}>رقم العميل</Th>
-              <Th color={'white'}> صنف 2000</Th>
-              <Th color={'white'}> صنف 1000</Th>
-              <Th color={'white'}> صنف 500</Th>
-              <Th color={'white'}> صنف 200</Th>
               <Th color={'white'}> أجراءات</Th>
-              <Th color={'white'}> أجراءات</Th>
-              <Th color={'white'}> أجراءات</Th>
+              <Th color={'white'}> </Th>
+              <Th color={'white'}> </Th>
+              <Th color={'white'}> </Th>
+           
 
             </Tr>
           </Thead>
@@ -58,15 +56,11 @@ const IncomeTablefilter = ({ data }) => {
                   <Td>{income.item?.balance}</Td>
                   <Td>{income.item?.operation_code}</Td>
                   <Td>{income.item?.client_code}</Td>
-                  <Td>{income.item?.first_qty}</Td>
-                  <Td>{income.item?.seconde_qty}</Td>
-                  <Td>{income.item?.tree_qty}</Td>
-                  <Td>{income.item?.four_qty}</Td>
-                  <Td>{income.item?.four_qty}</Td>
+                
                   <Td>
                     <HStack>
-                      <DeleteIncome Incomeid={income.item?.id}/>
-                      <UpdateIncome Incomeid={income.item?.id} />
+                      <DeleteIncome Incomeid={income.item}/>
+                      <UpdateIncome incomedata={income.item} />
                     </HStack>
                   </Td>
                 </Tr>

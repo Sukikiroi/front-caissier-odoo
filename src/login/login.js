@@ -48,9 +48,17 @@ const Login = () => {
         password: password,
       })
       .then(function (response) {
-        console.log(response);
+        console.log("login")
+        
+        console.log(response.data[0].company_ids.length);
+        if(response.data[0].company_ids.length===1){
+          localStorage.setItem("role",0)
+        }
+        else   localStorage.setItem("role",1)
         navigate('/home', { replace: true });
-
+localStorage.setItem("allcompany", JSON.stringify(response.data[0].company_ids))
+localStorage.setItem("company_id",response.data[0].company_id[0])
+localStorage.setItem("company",response.data[0].company_id[1])
         localStorage.setItem(
           'log',
           JSON.stringify({

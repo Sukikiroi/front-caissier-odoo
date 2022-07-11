@@ -45,10 +45,11 @@ function App() {
                   display: 'flex',
                 }}
               >
+                  <Sidebar />
                 <div style={{ flexGrow: '1', backgroundColor: 'white' }}>
                   <Income />
                 </div>
-                <Sidebar />
+              
               </div>
             }
           />
@@ -78,10 +79,11 @@ function App() {
              display: 'flex',
            }}
          >
+             <Sidebar />
            <div style={{ flexGrow: '1', backgroundColor: 'white' }}>
              <Spending />
            </div>
-           <Sidebar />
+         
          </div>
         
         
