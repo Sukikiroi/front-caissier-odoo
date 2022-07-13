@@ -11,6 +11,7 @@ import {
   Button,
   Input,
   Flex,
+  Text,
 } from '@chakra-ui/react';
 import Fuse from 'fuse.js';
 import { useSelector, useDispatch } from 'react-redux';
@@ -74,43 +75,49 @@ const IncomeFilter = () => {
           <DrawerOverlay />
           <DrawerContent>
             <DrawerCloseButton />
-            <DrawerHeader>القيام ببعض التصفية</DrawerHeader>
+            <DrawerHeader mr={20}>   البحت حسب</DrawerHeader>
 
             <DrawerBody>
+            <Input
+                placeholder=" التاريخ"
+                mb={30}
+                onChange={e => setdatefilter(e.target.value)}
+              />
               <Input
                 placeholder="رقم الزبون"
                 mb={30}
                 onChange={e => setcustomernumber(e.target.value)}
               />
-              <Input placeholder="عميل الصندوق" mb={30} />
+              <Input placeholder=" أمين الصندوق" mb={30} />
+          
+
+<Input
+                placeholder=" رمز العملية"
+                mb={30}
+                onChange={e => settime(e.target.value)}
+              />
+                <Input
+                placeholder="  المبلغ"
+                mb={30}
+                onChange={e => settime(e.target.value)}
+              />
+            <Box w="100%" mb={10}>
               <Input
-                placeholder=" التاريخ"
+                placeholder=" الفترة"
                 mb={30}
                 onChange={e => setdatefilter(e.target.value)}
               />
-
- 
-              <Box w="100%" mb={10}>
-
-              <DateRangePicker name="from to" onChange={onChange} value={value} style={{width:"100%"}}  clearIcon={<ClearOutlined/>}/>
+              <DateRangePicker name="from to" onChange={onChange} value={value} style={{width:"100%",height:"50"}}  clearIcon={<ClearOutlined/>}/>
  
 
               </Box>
 
 
 
-              <Input
-                placeholder=" الساعة"
-                mb={30}
-                onChange={e => settime(e.target.value)}
-              />
+            
 
-              <Input
-                placeholder="Type here..."
-                mb={30}
-                onChange={e => setoperationnumber(e.target.value)}
-              />
-              <Input placeholder="Type here..." mb={30} />
+             
+              
             </DrawerBody>
 
             <DrawerFooter>
@@ -120,8 +127,8 @@ const IncomeFilter = () => {
               <Button colorScheme="blue" onClick={clearfilter} mr={3}>
                 مسح
               </Button>
-              <Button colorScheme="blue" onClick={dofilter}>
-                فيلتر
+              <Button colorScheme="blue" onClick={dofilter} mr={3}>
+                بحت
               </Button>
             </DrawerFooter>
           </DrawerContent>

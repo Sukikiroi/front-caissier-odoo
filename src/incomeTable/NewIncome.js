@@ -176,11 +176,13 @@ const NewIncome = () => {
                   )}
 
                   <Select
+                   mr={50}
                     w={'45%'}
-                    placeholder=" العملية"
+                   
+                    placeholder="                 العملية        "
                     onChange={e => setoperationnumber(e.target.value)}
                   >
-                    <option value="    مخالصة     ">المخالصة</option>
+                    <option value="    مخالصة           ">المخالصة</option>
                     <option value="02مق">قسط</option>
                     <option value="03مأ">أخرى</option>
                   </Select>

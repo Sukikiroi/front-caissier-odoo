@@ -48,6 +48,7 @@ const IncomeFilter = () => {
     console.log(resultat);
    dispatch(updatespedningFiltedData(resultat))
   dispatch(actiavtesearch())
+  onClose()
   };
 
   const clearfilter = () => {
