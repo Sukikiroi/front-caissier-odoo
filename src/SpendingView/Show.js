@@ -10,6 +10,8 @@ import {
     useDisclosure,
     Button,
     Box,
+    Text,
+    Flex,
   } from '@chakra-ui/react'
 import { ViewIcon } from '@chakra-ui/icons'
 import currencyFormatter from "currency-formatter"
@@ -34,13 +36,19 @@ const Show = ({data}) => {
    الباب    {data.section}<br></br>
 {data.taxpayer}<br></br>
 {data.concerned}<br></br>
-    { currencyFormatter.format(data.sold, {
+<Flex>
+
+المبلغ      <Text fontSize={"xl"} mr={30}>
+{ currencyFormatter.format(data.sold, {
                             symbol: 'دج',
                             decimal: '.',
                             thousand: ',',
                             precision: 2,
                             format: '%v %s', // %s is the symbol and %v is the value
                           })}<br></br>
+  </Text>  
+</Flex>
+ 
          </Box>
         </ModalBody>
 

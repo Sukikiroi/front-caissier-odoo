@@ -20,20 +20,31 @@ import {
 import axios from "axios"
 import { DeleteIcon, CloseIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { useDispatch } from 'react-redux';
-import { updateData } from '../redux/slices';
+import { updateData, updatespendingData } from '../redux/slices';
 
 const DeleteIncome = ({Spenddata}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch=useDispatch()
+
+  const username = JSON.parse(localStorage.getItem('log')).username;
+  const password = JSON.parse(localStorage.getItem('log')).password;
+  const company_id = JSON.parse(localStorage.getItem('company_id'));
+  const user = {
+    username: username,
+    password: password,
+    company_id: company_id,
+  };
+
+
 const deleteone=()=>{
   axios.post('http://localhost:3004/spending/delete', {
     id: Spenddata.id,
   })
   .then(function (response) {
-    axios.get(`http://localhost:3004/spending`).then(res => {
+    axios.post(`http://localhost:3004/spending`,user).then(res => {
       
 
-      dispatch(updateData(res.data));
+      dispatch(updatespendingData(res.data));
       console.log(res.data)
     });
 

@@ -28,9 +28,15 @@ const initialState = {
   incomerealData:[],
 
   searchactivate: false,
-  company:localStorage.getItem('company')? localStorage.getItem('company')[0].companyname:""
+  company:localStorage.getItem('company')? localStorage.getItem('company')[0].companyname:"",
+  pageNumber:1,
+  pageSize:1,
 };
 
+function paginate(array, page_size, page_number) {
+  // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
+  return array.slice((page_number - 1) * page_size, page_number * page_size);
+}
 export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
@@ -69,8 +75,14 @@ export const settingsSlice = createSlice({
     },
     
     updateincomeData:(state, action) => {
-      state.incomerealData = action.payload;
+      state.incomerealData = action.payload// paginate(action.payload, 6, 1)
+      state.resultData=action.payload
+       
+      state.pageSize=(action.payload.length)/5
      
+    },
+    paginateData:(state,action)=>{
+      state.incomerealData = action.payload
     },
     actiavtesearch: state => {
       state.searchactivate = true;
@@ -89,6 +101,10 @@ export const settingsSlice = createSlice({
     },
     changecompany:(state,action)=>{
  console.log(action.payload)
+    },
+    updatepagenumber:(state,action)=>{
+      state.pageNumber=action.payload
+      //state.incomerealData = paginate(state.incomerealData, 5, state.pageNumber);
     }
   },
 });
@@ -108,6 +124,8 @@ export const {
   updatespedningFiltedData,
   updateincomeData,
   updateincomeFiltedData,
+  updatepagenumber,
+  paginateData,
 } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

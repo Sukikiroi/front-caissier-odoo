@@ -26,7 +26,7 @@ const Spendingtable = ({ data }) => {
   console.log("i am data")
   console.log( data)
   return (
-    <Container bg="black.600"  maxW={'1200px'}  color="black">
+    <Container bg="black.600"  maxW={'1450px'}  color="black">
       <TableContainer border={'4px solid #2C9BC8'} borderRadius={'5'}>
         <Table variant="simple">
           <PerfectScrollbar>

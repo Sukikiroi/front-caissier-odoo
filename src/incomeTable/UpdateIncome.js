@@ -17,14 +17,18 @@ import {
   Text,
 } from '@chakra-ui/react';
 import {
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Avatar,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
 } from '@chakra-ui/react';
 import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
+import currencyFormatter from "currency-formatter"
 import {
   Tag,
   TagLeftIcon,
@@ -33,7 +37,7 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { Label } from '@mui/icons-material';
-
+import { Divider } from '@chakra-ui/react';
 const UpdateIncome = ({ incomedata }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [data, setdata] = useState();
@@ -44,7 +48,6 @@ const UpdateIncome = ({ incomedata }) => {
   const [taxpayer, settaxpayer] = useState('');
   const [sold, setsold] = useState('');
 
- 
   return (
     <>
       <Button onClick={onOpen} bg={'white'}>
@@ -56,7 +59,7 @@ const UpdateIncome = ({ incomedata }) => {
           <ModalHeader>تحديث </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Box w={400} h={400} color="black">
+            <Box w={600} h={900} color="black">
               <Flex w={400} justifyContent={'space-between'} mb={5}>
                 <Text w={100} fontSize={'2xl'} mr={5}>
                   المبلغ
@@ -64,7 +67,7 @@ const UpdateIncome = ({ incomedata }) => {
                 <Input
                   w={300}
                   variant="filled"
-                  bg="blue.100"
+                  bg="blue.50"
                   placeholder="Filled"
                   value={incomedata.balance}
                   onChange={e => setconcerned(e.target.value)}
@@ -77,7 +80,7 @@ const UpdateIncome = ({ incomedata }) => {
                 <Input
                   w={300}
                   variant="filled"
-                  bg="blue.100"
+                  bg="blue.50"
                   placeholder="Filled"
                   value={incomedata.operation_code}
                   onChange={e => setdoor(e.target.value)}
@@ -90,65 +93,94 @@ const UpdateIncome = ({ incomedata }) => {
                 <Input
                   w={300}
                   variant="filled"
-                  bg="blue.100"
+                  bg="blue.50"
                   placeholder="Filled"
                   value={incomedata.client_code}
                   onChange={e => setentrance(e.target.value)}
                 />
               </Flex>
+              <Flex
+                w="600"
+                h={100}
+                border=""
+                shadow={'md'}
+                rounded={'md'}
+                justifyContent="space-between"
+              >
+                <Divider orientation="vertical" />
+                g
+                <Divider orientation="vertical" />
+                g
+                <Divider orientation="vertical" />g
+              </Flex>
 
-              <Tabs align="end" variant="enclosed">
-                <TabList>
-                  <Tab>ورق</Tab>
-                  <Tab>معدن</Tab>
-                </TabList>
-                <TabPanels>
-                  <TabPanel>
-                    <Box w="30%" h="100%" display="block">
-                      <Flex justifyContent="space-between" mb={5}>
-                        <Tag>200 </Tag>
-                        X{incomedata.first_qty}
-                      </Flex>
+              <TableContainer>
+                <Table variant="simple">
+                  <TableCaption>
+                    Imperial to metric conversion factors
+                  </TableCaption>
+                  <Thead>
+                    <Tr>
+                      <Th> الفئة </Th>
+                      <Th>العدد</Th>
+                      <Th isNumeric> المجموع الجزئي </Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    <Tr>
+                      <Td>2000 دج </Td>
+                      <Td>8</Td>
+                      <Td>   {currencyFormatter.format(8 * 2000, {
+                          symbol: 'دج',
+                          decimal: '.',
+                          thousand: ',',
+                          precision: 2,
+                          format: '%v %s', // %s is the symbol and %v is the value
+                        })}{' '}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>1000 دج </Td>
 
-                      <Flex justifyContent="space-between" mb={5}>
-                        <Tag>500 </Tag>
-                        X2
-                      </Flex>
-                      <Flex justifyContent="space-between" mb={5}>
-                        <Tag>1000 </Tag>
-                        X2
-                      </Flex>
-                    </Box>
-                  </TabPanel>
-                  <TabPanel>
-                    <Box w="30%" h="100%" display="block">
-                      <Flex justifyContent="space-between" mb={5}>
-                        <Tag>10 </Tag>
-                        X2
-                      </Flex>
+                      <Td>3</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>500 دج </Td>
 
-                      <Flex justifyContent="space-between" mb={5}>
-                        <Tag>20 </Tag>
-                        X2
-                      </Flex>
-                      <Flex justifyContent="space-between" mb={5}>
-                        <Tag>50 </Tag>
-                        X2
-                      </Flex>
+                      <Td>1</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>200 دج </Td>
 
-                      <Flex justifyContent="space-between" mb={5}>
-                        <Tag>100 </Tag>
-                        X2
-                      </Flex>
+                      <Td>3</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>100 دج </Td>
 
-                      <Flex justifyContent="space-between" mb={5}>
-                        <Tag>200 </Tag>
-                        X2
-                      </Flex>
-                    </Box>
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
+                      <Td>3</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>50 دج </Td>
+
+                      <Td>3</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>20 دج </Td>
+
+                      <Td>3</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>10 دج </Td>
+
+                      <Td>3</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>5 دج </Td>
+
+                      <Td>3</Td>
+                    </Tr>
+                  </Tbody>
+                </Table>
+              </TableContainer>
             </Box>
           </ModalBody>
 
@@ -156,7 +188,10 @@ const UpdateIncome = ({ incomedata }) => {
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               الغاء
             </Button>
-            <Button variant="outline"> تغيير</Button>
+            <Button variant="outline" mr={20}>
+              {' '}
+              تغيير
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

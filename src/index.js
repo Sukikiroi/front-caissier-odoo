@@ -1,4 +1,4 @@
-import { ColorModeScript } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -9,8 +9,8 @@ import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
  
 
-
-import '@fontsource/raleway/400.css'
+import '@fontsource/readex-pro/700.css'
+import '@fontsource/cairo/400.css'
 import '@fontsource/open-sans/700.css'
 import theme from './theme'
 import Sidebar from './Sidebar'
@@ -19,10 +19,12 @@ ReactDOM.render(
   <StrictMode>
     <BrowserRouter>
     
-  
+    <ChakraProvider theme={theme}>
+    <App />
+    </ChakraProvider>
 
    
-      <App />
+    
    
     
     </BrowserRouter>

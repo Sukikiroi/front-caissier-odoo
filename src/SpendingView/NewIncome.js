@@ -855,7 +855,7 @@ const NewIncome = () => {
               <VStack>
                 <HStack w="100%">
                   <Box w={'50%'}>
-                    <Select
+                    <Select pr={30}
                       w={'100%'}
                       placeholder=" الفسم"
                       onChange={e => handledoors(e.target.value)}
@@ -867,7 +867,7 @@ const NewIncome = () => {
                   </Box>
 
                   <Select
-                    w={'50%'}
+                    w={'50%'}  pr={30}
                     placeholder="المدخل "
                     onChange={e => handlesections(e.target.value)}
                   >
@@ -877,7 +877,7 @@ const NewIncome = () => {
                   </Select>
                 </HStack>
                 <Select
-                  w={'100%'}
+                  w={'100%'}  pr={30}
                   placeholder=" الباب"
                   onChange={e => handleentrances(e.target.value)}
                 >

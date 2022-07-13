@@ -10,6 +10,7 @@ import {
   useDisclosure,
   Button,
   Input,
+  Flex,
 } from '@chakra-ui/react';
 import Fuse from 'fuse.js';
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,14 +21,13 @@ import {
   updateincomeFiltedData,
 } from '../redux/slices';
 import axios from 'axios';
+import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+ 
 
-import { useDatePicker } from '@react-aria/datepicker';
-
-import { DateRangePicker } from '../datelib/DateRangePicker';
-import { DatePicker } from '../datelib/DatePicker';
-import { today, now, getLocalTimeZone } from '@internationalized/date';
-import { OverlayContainer, OverlayProvider } from '@react-aria/overlays';
+ 
+ 
 import { ChakraProvider, Box, Heading, Link } from '@chakra-ui/react';
+import { ClearOutlined } from '@mui/icons-material';
 
 const IncomeFilter = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,7 +38,7 @@ const IncomeFilter = () => {
   const [customernumber, setcustomernumber] = useState(0);
   const [operationnumber, setoperationnumber] = useState('');
   const [time, settime] = useState('');
-
+  const [value, onChange] = useState([new Date(), new Date()]);
   const dofilter = () => {
     console.log(incomerealData);
     const fuse = new Fuse(incomerealData, {
@@ -46,7 +46,7 @@ const IncomeFilter = () => {
       useExtendedSearch: true,
     });
 
-    console.log(fuse.search({ $or: [{ date: datefilter }] }));
+    console.log( value);
     dispatch(
       updateincomeFiltedData(fuse.search({ $or: [{ date: "="+datefilter }] }))
     );
@@ -88,6 +88,17 @@ const IncomeFilter = () => {
                 mb={30}
                 onChange={e => setdatefilter(e.target.value)}
               />
+
+ 
+              <Box w="100%" mb={10}>
+
+              <DateRangePicker name="from to" onChange={onChange} value={value} style={{width:"100%"}}  clearIcon={<ClearOutlined/>}/>
+ 
+
+              </Box>
+
+
+
               <Input
                 placeholder=" الساعة"
                 mb={30}

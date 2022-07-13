@@ -19,13 +19,17 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
 import { HiOutlinePrinter } from 'react-icons/hi';
-import Printmodal from '../print/Printmodal';
+import Printmodal from '../incomeTable/PrintModal';
 import InfoIcon from '@mui/icons-material/Info';
 import currencyFormatter from "currency-formatter"
+import Show from './Show';
+import { FcPrint } from 'react-icons/fc';
+import PrintModal from '../incomeTable/PrintModal';
+import Print from './Print';
 const IncomeTable = ({ data }) => {
   return (
-    <Container maxW="800" bg="black.600" color="black">
-      <TableContainer border={'4px solid #2C9BC8'} borderRadius={'5'}>
+    <Container maxW="1050" mt={50} bg="black.600" color="black">
+      <TableContainer border={'4px solid #2C9BC8'} borderRadius={'5'} shadow="lg">
         <Table variant="simple">
           <PerfectScrollbar>
             <Thead bg={'#2C9BC8'} w="800">
@@ -33,7 +37,10 @@ const IncomeTable = ({ data }) => {
                 <Th color={'white'}>الساعة</Th>
                 <Th color={'white'}>التاريخ</Th>
                 <Th color={'white'}> المبلغ</Th>
-                <Th color={'white'}>رقم العملية</Th>
+                <Th color={'white'}>رقم التسلسلي</Th>
+
+                <Th color={'white'}>رمز العملية</Th>
+
                 <Th color={'white'} > رقم الزبون</Th>
                 <Th color={'white'} >الاجرأت</Th>
                 <Th color={'white'} > </Th>
@@ -58,13 +65,11 @@ const IncomeTable = ({ data }) => {
                         format: '%v %s', // %s is the symbol and %v is the value
                       })}
                     </Td>
+                    <Td>{income.id}</Td>
                     <Td>{income.operation_code}</Td>
                     <Td>{income.client_code}</Td>
 
-                    {/* <Td>{income.first_qty}</Td>
-                    <Td>{income.seconde_qty}</Td>
-                    <Td>{income.tree_qty}</Td>
-                    <Td>{income.four_qty}</Td> */}
+ 
 
                     <Td>
                       <HStack>
@@ -75,6 +80,9 @@ const IncomeTable = ({ data }) => {
                         )}
 
                         <UpdateIncome incomedata={income} />
+                      <Print data={income}/>
+                        <Show data={income}/>
+                   
                       </HStack>
                     </Td>
                   </Tr>
@@ -83,6 +91,7 @@ const IncomeTable = ({ data }) => {
             </Tbody>
           </PerfectScrollbar>
         </Table>
+        
       </TableContainer>
     </Container>
   );

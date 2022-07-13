@@ -23,7 +23,7 @@ import { useToast } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import SelectSearch from 'react-select';
 import axios from 'axios';
-import { updateData } from '../redux/slices';
+import { updateData, updateincomeData } from '../redux/slices';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import NewCustomer from './NewCustomer';
 import supabase from '../supabase.config';
@@ -64,27 +64,33 @@ const NewIncome = () => {
   const newIncome = {
     customer: customernumber,
     operation: operationnumber,
-    balance: balance,
+    balance: sold,
     caisseuser: caisseuser,
-    paperone: paperone,
-    papertwo: papertwo,
-    papertree: papertree,
-    coinone: coinone,
-    cointwo: cointwo,
-    cointree: cointree,
-    coinfour: coinfour,
-    coinfive: coinfive,
+    paperone: Number(paperone),
+    papertwo: Number(papertwo),
+    papertree: Number(papertree),
+    paperfour:Number(paperfour),
+    coinone: Number(coinone),
+    cointwo: Number(cointwo),
+    cointree: Number(cointree),
+    coinfour: Number(coinfour),
+    coinfive: Number(coinfive),
     company_id: JSON.parse(localStorage.getItem('company_id')),
   };
 
   const sendIncome = () => {
     console.log(newIncome);
+
     axios
       .post(`http://localhost:3004/income/newincome`, newIncome)
       .then(res => {
         setdesable(true);
-        axios.get(`http://localhost:3004/income`).then(res => {
-          dispatch(updateData(res.data));
+        const username=JSON.parse(localStorage.getItem('log')).username
+        const password=JSON.parse(localStorage.getItem('log')).password
+        const company_id= JSON.parse(localStorage.getItem('company_id'))
+        const user={username:username,password:password,company_id:company_id}
+        axios.post(`http://localhost:3004/income`,user).then(res => {
+          dispatch(updateincomeData(res.data));
         });
         onClose();
       });
@@ -113,8 +119,8 @@ const NewIncome = () => {
  
   let customerdata = [
     { label: 'aziz', number: '12',address:"annaba" },
-    { label: 'aziz', number: '12',address:"annaba" },
-    { label: 'aziz', number: '12',address:"annaba" },
+    { label: 'Burhan', number: '12',address:"annaba" },
+    { label: 'Ifri', number: '12',address:"annaba" },
   ];
 
  
@@ -174,9 +180,9 @@ const NewIncome = () => {
                     placeholder=" العملية"
                     onChange={e => setoperationnumber(e.target.value)}
                   >
-                    <option value="1">المخالصة</option>
-                    <option value="2">قسط</option>
-                    <option value="3">أخرى</option>
+                    <option value="    مخالصة     ">المخالصة</option>
+                    <option value="02مق">قسط</option>
+                    <option value="03مأ">أخرى</option>
                   </Select>
                 </HStack>
                 <Flex w={'100%'}>
@@ -209,46 +215,53 @@ const NewIncome = () => {
                   <TabPanels>
                     <TabPanel>
                       <Flex>
-                        <Input
-                          placeholder="200 دج"
-                          onChange={e => setpaperone(e.target.value)}
+                      <Input
+                          placeholder="2000 دج "
+                          onChange={e => setpaperfour(e.target.value)}
                         />
-                        <Input
+                           <Input
+                          placeholder="1000 دج "
+                          onChange={e => setpapertree(e.target.value)}
+                        />
+                          <Input
                           placeholder="500 دج "
                           onChange={e => setpapertwo(e.target.value)}
                         />
                         <Input
-                          placeholder="1000 دج "
-                          onChange={e => setpapertree(e.target.value)}
+                          placeholder="200 دج"
+                          onChange={e => setpaperone(e.target.value)}
                         />
-                        <Input
-                          placeholder="2000 دج "
-                          onChange={e => setpaperfour(e.target.value)}
-                        />
+                      
+                     
+                      
                       </Flex>
                     </TabPanel>
                     <TabPanel>
                       <Flex>
-                        <Input
-                          placeholder=" 10 دج"
-                          onChange={e => setcoinone(e.target.value)}
+                      <Input
+                          placeholder="200 دج"
+                          onChange={e => setcoinfive(e.target.value)}
                         />
-                        <Input
+                         <Input
+                          placeholder=" 100 دج "
+                          onChange={e => setcoinfour(e.target.value)}
+                        />
+                          <Input
+                          placeholder="50 دج "
+                          onChange={e => setcointree(e.target.value)}
+                        />
+                          <Input
                           placeholder=" 20 دج"
                           onChange={e => setcointwo(e.target.value)}
                         />
                         <Input
-                          placeholder="50 دج "
-                          onChange={e => setcointree(e.target.value)}
+                          placeholder=" 10 دج"
+                          onChange={e => setcoinone(e.target.value)}
                         />
-                        <Input
-                          placeholder=" 100 دج "
-                          onChange={e => setcoinfour(e.target.value)}
-                        />
-                        <Input
-                          placeholder="200 دج"
-                          onChange={e => setcoinfive(e.target.value)}
-                        />
+                      
+                      
+                       
+                      
                       </Flex>
                     </TabPanel>
                   </TabPanels>

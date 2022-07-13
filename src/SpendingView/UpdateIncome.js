@@ -23,7 +23,7 @@ import { DeleteIcon, EditIcon, WarningIcon } from '@chakra-ui/icons';
 import axios from "axios"
 import { Label } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
-import { updateData } from '../redux/slices';
+import { updateData, updatespendingData } from '../redux/slices';
 
 
 const UpdateIncome = ({Spendid}) => {
@@ -52,7 +52,19 @@ const [sold, setsold] = useState("")
     onOpen()
    
   }
- 
+
+  
+
+  const username = JSON.parse(localStorage.getItem('log')).username;
+  const password = JSON.parse(localStorage.getItem('log')).password;
+  const company_id = JSON.parse(localStorage.getItem('company_id'));
+  const user = {
+    username: username,
+    password: password,
+    company_id: company_id,
+  };
+
+
 
 const updatespending=()=>{
   console.log(Spendid) 
@@ -67,8 +79,11 @@ const updatespending=()=>{
   })
   .then(function (response) {
     console.log(response);
-    axios.get(`http://localhost:3004/spending`).then(res => {
-      dispatch(updateData(res.data));
+    axios.post(`http://localhost:3004/spending`,user).then(res => {
+      
+
+      dispatch(updatespendingData(res.data));
+      console.log(res.data)
     });
     onClose()
     toast({

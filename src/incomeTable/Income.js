@@ -18,6 +18,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbSeparator,
+  
 } from '@chakra-ui/react';
 import {
   Avatar,
@@ -38,7 +39,8 @@ import Drawernavbar from './drawerNavbar';
 import IncomeFilter from './IncomeFilter';
 import NewIncome from './NewIncome';
 import Fuse from 'fuse.js';
-
+ 
+ import Pagination from "./pagination"
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -57,11 +59,15 @@ import { DateRangePicker } from "../datelib/DateRangePicker";
 import { DatePicker } from "../datelib/DatePicker";
 import { today, now, getLocalTimeZone } from "@internationalized/date";
 import { OverlayContainer , OverlayProvider} from "@react-aria/overlays";
+import BasicPagination from './pagination';
  
 const Income = () => {
+  const incomerealData = useSelector(state => state.settings.incomerealData);
   const resultData = useSelector(state => state.settings.resultData);
+  
   const incomeFilteredData = useSelector(state => state.settings.incomeFilteredData);
   const searchactivate = useSelector(state => state.settings.searchactivate);
+  const pageSize = useSelector(state => state.settings.pageSize);
   const dispatch = useDispatch();
 
   const [dataincome, setdataincome] = React.useState([]);
@@ -93,7 +99,7 @@ console.log(JSON.parse(localStorage.getItem("log")).company)
 console.log(company_id)
 localStorage.setItem("company_id",company_id)
 
-if(company_id==1)localStorage.setItem('company',"Sidi Harb")
+if(company_id==1)localStorage.setItem('company',"MMG")
 if(company_id==2)localStorage.setItem('company',"IFri")
 if(company_id==3)localStorage.setItem('company',"EL Bouni")
  }
@@ -109,11 +115,11 @@ if(company_id==3)localStorage.setItem('company',"EL Bouni")
             justifyContent={'flex-start'}
           >
             <Center w={'100%'} h={50}>
-              <Heading>المداخيل</Heading>
+              <Heading> المداخيل</Heading>
             </Center>
           </Flex>
 
-          <Box w={'100%'} h={500}  mb={100}>
+          <Box w={'100%'} h={500} mb={100}>
             <VStack>
               <Flex w={'100%'} mt={30} justifyContent={'flex-start'}>
                 <HStack>
@@ -124,32 +130,46 @@ if(company_id==3)localStorage.setItem('company',"EL Bouni")
                   </ChakraProvider>
 
                   <NewIncome />
-                  
-                     { localStorage.getItem('role')==1 ? 
-                     <Flex alignItems={"center"} w={400}>
 
-                    
-                     <Text w={150} color="black"> { localStorage.getItem('company')} </Text> 
-                     <Select color="black" placeholder="Select Company" onChange={(e)=>changecompany(e.target.value)}>
-                        <option value="1">Sidi Harb </option>
+                  {localStorage.getItem('role') == 1 ? (
+                    <Flex alignItems={'center'} w={400} justifyContent="space-between">
+                      <Button   color="white"  pr={30} rounded="md" bg="blue.100" align={"center"}>
+                       
+                        {localStorage.getItem('company')}{' '}
+                      </Button>
+                      <Select pr={30}
+                        color="black"
+                        placeholder="  الشركة  "
+                        onChange={e => changecompany(e.target.value)}
+                      >
+                        <option value="1">MMG </option>
                         <option value="2">IFri</option>
                         <option value="3">EL Bouni</option>
                       </Select>
-                      </Flex>
-                      :
-                     <Text color="black"> { localStorage.getItem('company')} </Text> 
-                      }
-                 
-                
+                    </Flex>
+                  ) : (
+                    <Text color="black">
+                      {' '}
+                      {localStorage.getItem('company')}{' '}
+                    </Text>
+                  )}
                 </HStack>
               </Flex>
               <Box bg={'white'} w={'100%'}>
                 {searchactivate ? (
                   <IncomeTablefilter data={incomeFilteredData} />
                 ) : (
-                  <IncomeTable data={dataincome} />
+                  <IncomeTable data={incomerealData} />
                 )}
               </Box>
+              <Flex
+                w={'100%'}
+                h={400}
+                alignItems="center"
+                justifyContent={'center'}
+              >
+               
+              </Flex>
             </VStack>
           </Box>
         </VStack>

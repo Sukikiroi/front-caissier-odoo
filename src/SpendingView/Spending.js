@@ -88,7 +88,7 @@ const Income = () => {
       console.log(company_id)
       localStorage.setItem("company_id",company_id)
       
-      if(company_id==1)localStorage.setItem('company',"Sidi Harb")
+      if(company_id==1)localStorage.setItem('company',"MMG")
       if(company_id==2)localStorage.setItem('company',"IFri")
       if(company_id==3)localStorage.setItem('company',"EL Bouni")
        }
@@ -132,16 +132,21 @@ const Income = () => {
 
                   <NewIncome />
                   { localStorage.getItem('role')==1 ? 
-                     <Flex alignItems={"center"} w={400}>
-
-                    
-                     <Text w={150} color="black"> { localStorage.getItem('company')} </Text> 
-                     <Select color="black" placeholder="Select Company" onChange={(e)=>changecompany(e.target.value)}>
-                        <option value="1">Sidi Harb </option>
-                        <option value="2">IFri</option>
-                        <option value="3">EL Bouni</option>
-                      </Select>
-                      </Flex>
+                       <Flex alignItems={'center'} w={400} justifyContent="space-between">
+                       <Text w={250} color="black">
+                      الشركة الحالية
+                         {localStorage.getItem('company')}{' '}
+                       </Text>
+                       <Select pr={30}
+                         color="black"
+                         placeholder=" اختيار الشركة  "
+                         onChange={e => changecompany(e.target.value)}
+                       >
+                         <option value="1">MMG </option>
+                         <option value="2">IFri</option>
+                         <option value="3">EL Bouni</option>
+                       </Select>
+                     </Flex>
                       :
                      <Text color="black"> { localStorage.getItem('company')} </Text> 
                       }

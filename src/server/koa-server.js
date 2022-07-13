@@ -174,10 +174,12 @@ app.post('/income/newincome', async (req, res) => {
       coin_four: req.body.coinone,
       coin_five: req.body.coinone,
       coin_six: req.body.coinone,
+      balance:req.body.balance,
       date: todayDate,
-      operation_code: 2,
+      operation_code: req.body.operation,
       client_code: 3,
-      company_id:req.body.company_id
+      company_id:req.body.company_id,
+      
     });
     
 
@@ -270,7 +272,7 @@ app.post('/spending', async (req, res) => {
   await odoo.connect();
   const records = await odoo.searchRead(`caissier.spending`,{"company_id":req.body.company_id});
 
-  res.end(JSON.stringify(records, null, 2));
+  res.send(JSON.stringify(records, null, 2));
 });
 
 app.post('/spending/new', async (req, res) => {
@@ -297,7 +299,7 @@ app.post('/spending/new', async (req, res) => {
     company_id:1
   });
 
-  res.end(JSON.stringify(new_spending, null, 2));
+  res.send(JSON.stringify(new_spending, null, 2));
 });
 
 app.post('/spending/id', async (req, res) => {

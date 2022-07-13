@@ -63,10 +63,11 @@ function App() {
           display: 'flex',
         }}
       >
+            <Sidebar />
         <div style={{ flexGrow: '1', backgroundColor: 'white' }}>
           <Closing />
         </div>
-        <Sidebar />
+    
       </div>
         
         } />
@@ -97,10 +98,11 @@ function App() {
              display: 'flex',
            }}
          >
+                <Sidebar />
            <div style={{ flexGrow: '1', backgroundColor: 'white' }}>
              <Openning />
            </div>
-           <Sidebar />
+      
          </div>
         
         
@@ -134,10 +136,11 @@ function App() {
             display: 'flex',
           }}
         >
+            <Sidebar />
           <div style={{ flexGrow: '1', backgroundColor: 'white' }}>
           <Settings />
           </div>
-          <Sidebar />
+        
         </div>
           
           
